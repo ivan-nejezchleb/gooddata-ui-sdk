@@ -553,6 +553,10 @@ $gd-header-project-width: 230px;
         text-transform: uppercase;
     }
 
+    .project-settings {
+        padding: 2px 3px 1px;
+    }
+
     &.gd-is-selected {
         font-weight: bold;
     }

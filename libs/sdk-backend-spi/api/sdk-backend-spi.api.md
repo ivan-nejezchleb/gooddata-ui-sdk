@@ -1214,7 +1214,18 @@ export interface ITextExpressionToken {
 }
 
 // @beta
-export interface ITheme {
+export type ITheme = IThemeDefinition & IThemeMeta;
+
+// @beta
+export interface IThemeColorFamily {
+    base: ThemeColor;
+    contrast?: ThemeColor;
+    dark?: ThemeColor;
+    light?: ThemeColor;
+}
+
+// @beta
+export interface IThemeDefinition {
     analyticalDesigner?: {
         title?: {
             color?: ThemeColor;
@@ -1301,14 +1312,6 @@ export interface ITheme {
 }
 
 // @beta
-export interface IThemeColorFamily {
-    base: ThemeColor;
-    contrast?: ThemeColor;
-    dark?: ThemeColor;
-    light?: ThemeColor;
-}
-
-// @beta
 export interface IThemeKpi {
     primaryMeasureColor?: ThemeColor;
     secondaryInfoColor?: ThemeColor;
@@ -1317,6 +1320,16 @@ export interface IThemeKpi {
         positiveColor?: ThemeColor;
         negativeColor?: ThemeColor;
     };
+}
+
+// @beta
+export interface IThemeMeta {
+    created?: string;
+    identifier?: string;
+    isLocked?: boolean;
+    title?: string;
+    updated?: string;
+    uri?: string;
 }
 
 // @beta
@@ -1627,7 +1640,8 @@ export interface IWorkspacesQueryResult extends IPagedResource<IAnalyticalWorksp
 // @public
 export interface IWorkspaceStylingService {
     getColorPalette(): Promise<IColorPalette>;
-    getTheme(): Promise<ITheme>;
+    getTheme(): Promise<IThemeDefinition>;
+    getThemes(): Promise<ITheme[]>;
 }
 
 // @public

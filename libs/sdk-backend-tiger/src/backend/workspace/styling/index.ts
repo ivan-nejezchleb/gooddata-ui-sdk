@@ -1,5 +1,5 @@
 // (C) 2019-2020 GoodData Corporation
-import { IWorkspaceStylingService, ITheme } from "@gooddata/sdk-backend-spi";
+import { IWorkspaceStylingService, ITheme, IThemeDefinition } from "@gooddata/sdk-backend-spi";
 import { IColorPaletteItem } from "@gooddata/sdk-model";
 
 import { TigerAuthenticatedCallGuard } from "../../../types";
@@ -13,7 +13,11 @@ export class TigerWorkspaceStyling implements IWorkspaceStylingService {
         return this.authCall(async () => DefaultColorPalette);
     };
 
-    public getTheme = async (): Promise<ITheme> => {
+    public getTheme = async (): Promise<IThemeDefinition> => {
         return this.authCall(async () => DefaultTheme);
+    };
+
+    public getThemes = async (): Promise<ITheme[]> => {
+        return this.authCall(async () => [DefaultTheme]);
     };
 }

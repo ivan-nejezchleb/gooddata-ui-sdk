@@ -27,6 +27,11 @@ export interface IThemeProviderProps {
      * component tree.
      */
     workspace?: string;
+
+    /**
+     * Theme object to use instead of one loaded from workspace
+     */
+    adhocTheme?: ITheme;
 }
 
 /**
@@ -43,13 +48,14 @@ export const ThemeProvider: React.FC<IThemeProviderProps> = ({
     children,
     backend: backendParam,
     workspace: workspaceParam,
+    adhocTheme,
 }) => {
     const backendFromContext = useBackend();
     const backend = backendParam || backendFromContext;
     const workspaceFromContext = useWorkspace();
     const workspace = workspaceParam || workspaceFromContext;
 
-    const [theme, setTheme] = useState<ITheme>({});
+    const [theme, setTheme] = useState<ITheme>(adhocTheme);
     const [isLoading, setIsLoading] = useState(false);
 
     const lastWorkspace = useRef<string>();
@@ -59,13 +65,17 @@ export const ThemeProvider: React.FC<IThemeProviderProps> = ({
         const fetchData = async () => {
             clearCssProperties();
 
-            if (!backend || !workspace) {
+            if ((!backend || !workspace) && !adhocTheme) {
                 return;
             }
 
             setIsLoading(true);
-
-            const selectedTheme = await backend.workspace(workspace).styling().getTheme();
+            let selectedTheme;
+            if (!adhocTheme) {
+                selectedTheme = await backend.workspace(workspace).styling().getTheme();
+            } else {
+                selectedTheme = adhocTheme;
+            }
             if (lastWorkspace.current === workspace) {
                 setTheme(selectedTheme);
                 setIsLoading(false);
@@ -74,7 +84,7 @@ export const ThemeProvider: React.FC<IThemeProviderProps> = ({
         };
 
         fetchData();
-    }, [workspace, backend]);
+    }, [workspace, backend, adhocTheme]);
 
     return (
         <ThemeContextProvider theme={theme} themeIsLoading={isLoading}>

@@ -78,19 +78,20 @@ const info = {
     ],
 };
 
-const getWorkspaceDescriptors = () => {
-    return times(10, (i) => ({
+const getWorkspaceDescriptors = (selectedWorkspace: any) => {
+    const others = times(10, (i) => ({
         id: `${i + 1}`,
         title: `Project ${i + 1}`,
         description: `This is Project ${i + 1}`,
         isDemo: i % 2 === 1 && i < 10,
     }));
+    return [selectedWorkspace, ...others];
 };
 
 const getPicker = (selectedWorkspace: any) => (
     <HeaderWorkspacePicker
         className={"s-app-header-workspace-picker"}
-        workspaces={getWorkspaceDescriptors()}
+        workspaces={getWorkspaceDescriptors(selectedWorkspace)}
         selectedWorkspace={selectedWorkspace}
         totalWorkspacesCount={10}
     />

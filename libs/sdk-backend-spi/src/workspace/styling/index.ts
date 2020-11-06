@@ -1,7 +1,7 @@
 // (C) 2019-2020 GoodData Corporation
 import { IColorPalette } from "@gooddata/sdk-model";
 
-import { ITheme } from "./theme";
+import { ITheme, IThemeDefinition } from "./theme";
 
 export {
     ThemeFontUri,
@@ -12,6 +12,8 @@ export {
     IThemePalette,
     IThemeKpi,
     ITheme,
+    IThemeDefinition,
+    IThemeMeta,
 } from "./theme";
 
 /**
@@ -36,5 +38,12 @@ export interface IWorkspaceStylingService {
      *
      * @returns promise of theme
      */
-    getTheme(): Promise<ITheme>;
+    getTheme(): Promise<IThemeDefinition>;
+
+    /**
+     * Asynchronously returns all themes.
+     *
+     * @returns promise of themes array
+     */
+    getThemes(): Promise<ITheme[]>;
 }

@@ -6,8 +6,10 @@
 
 import { Component } from 'react';
 import { guidFor } from '@gooddata/goodstrap/lib/core/Guid';
+import { IAnalyticalBackend } from '@gooddata/sdk-backend-spi';
 import { IntlShape } from 'react-intl';
 import { ISeparators } from '@gooddata/sdk-ui';
+import { ITheme } from '@gooddata/sdk-backend-spi';
 import { PureComponent } from 'react';
 import { default as React_2 } from 'react';
 import * as React_3 from 'react';
@@ -280,7 +282,7 @@ export type GetPositionedSelfRegion = {
 export const Header: React_2.FC<IHeaderProps>;
 
 // @internal (undocumented)
-export const HeaderWorkspacePicker: React_2.ForwardRefExoticComponent<Pick<IHeaderWorkspacePickerProps, "className" | "onSelect" | "isLoading" | "onScrollEnd" | "searchString" | "onSearch" | "showSearch" | "workspaces" | "selectedWorkspace" | "totalWorkspacesCount" | "onOpen" | "projectPickerFooter"> & {
+export const HeaderWorkspacePicker: React_2.ForwardRefExoticComponent<Pick<IHeaderWorkspacePickerProps, "className" | "onSelect" | "isLoading" | "onScrollEnd" | "searchString" | "onSearch" | "showSearch" | "workspaces" | "selectedWorkspace" | "totalWorkspacesCount" | "onOpen" | "projectPickerFooter" | "onSettingsClick"> & {
     forwardedRef?: React_2.Ref<any>;
 } & React_2.RefAttributes<any>> & {
     WrappedComponent: React_2.ComponentType<IHeaderWorkspacePickerProps>;
@@ -626,6 +628,8 @@ export interface IHeaderWorkspacePickerProps {
     onSearch?: (searchString: string) => void;
     // (undocumented)
     onSelect?: (item: IHeaderWorkspace) => void;
+    // (undocumented)
+    onSettingsClick?: (item: IHeaderWorkspace) => void;
     // (undocumented)
     projectPickerFooter?: React_2.ReactNode;
     // (undocumented)
@@ -1590,6 +1594,15 @@ export const Item: React_2.FC<IItemProps>;
 // @internal (undocumented)
 export const ItemsWrapper: React_2.FC<IItemsWrapperProps>;
 
+// @beta (undocumented)
+export interface IThemesListProps {
+    backend?: IAnalyticalBackend;
+    // (undocumented)
+    onSelect?: (selectedTheme: ITheme) => void;
+    selectedTheme?: string;
+    workspace?: string;
+}
+
 // @internal (undocumented)
 export interface ITimepickerOwnProps {
     // (undocumented)
@@ -1865,6 +1878,9 @@ export class Tabs extends Component<ITabsProps, ITabsState> {
     // (undocumented)
     render(): JSX.Element;
     }
+
+// @beta
+export const ThemesList: React_2.FC<IThemesListProps>;
 
 // @internal (undocumented)
 export class Timepicker extends React_2.PureComponent<ITimepickerOwnProps> {

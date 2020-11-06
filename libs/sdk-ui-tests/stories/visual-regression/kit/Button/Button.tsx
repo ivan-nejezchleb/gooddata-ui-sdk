@@ -1,5 +1,6 @@
 // (C) 2020 GoodData Corporation
 import { Button } from "@gooddata/sdk-ui-kit";
+import { ThemeProvider } from "@gooddata/sdk-ui-theme-provider";
 import React from "react";
 import uniqueId from "lodash/uniqueId";
 
@@ -233,44 +234,44 @@ const icons = [
     "date",
 ];
 
-storiesOf(`${UiKit}/Button`, module).add("full-featured button", () => {
-    const getButtons = () => {
-        return types.map((item) => {
-            return (
-                <tr key={uniqueId("button-")}>
-                    <td>
-                        <Button
-                            value={item.title}
-                            className={item.className}
-                            iconLeft={item.iconLeft}
-                            iconRight={item.iconRight}
-                        />
-                        <Button
-                            value={item.title}
-                            className={item.className}
-                            iconLeft={item.iconLeft}
-                            iconRight={item.iconRight}
-                            disabled
-                        />
-                    </td>
-                    <td className="example-buttons-button-class">
-                        <code>{item.className}</code>
-                        {item.iconLeft && (
-                            <div>
-                                <code>{item.iconLeft}</code>
-                            </div>
-                        )}
-                        {item.iconRight && (
-                            <div>
-                                <code>{item.iconRight}</code>
-                            </div>
-                        )}
-                    </td>
-                </tr>
-            );
-        });
-    };
+const getButtons = () => {
+    return types.map((item) => {
+        return (
+            <tr key={uniqueId("button-")}>
+                <td>
+                    <Button
+                        value={item.title}
+                        className={item.className}
+                        iconLeft={item.iconLeft}
+                        iconRight={item.iconRight}
+                    />
+                    <Button
+                        value={item.title}
+                        className={item.className}
+                        iconLeft={item.iconLeft}
+                        iconRight={item.iconRight}
+                        disabled
+                    />
+                </td>
+                <td className="example-buttons-button-class">
+                    <code>{item.className}</code>
+                    {item.iconLeft && (
+                        <div>
+                            <code>{item.iconLeft}</code>
+                        </div>
+                    )}
+                    {item.iconRight && (
+                        <div>
+                            <code>{item.iconRight}</code>
+                        </div>
+                    )}
+                </td>
+            </tr>
+        );
+    });
+};
 
+storiesOf(`${UiKit}/Button`, module).add("full-featured button", () => {
     const getGroupButtons = () => (
         <tr key={uniqueId("button-")}>
             <td>
@@ -314,5 +315,39 @@ storiesOf(`${UiKit}/Button`, module).add("full-featured button", () => {
             <h4>Icons</h4>
             <div className="icons-list">{getIcons()}</div>
         </div>,
+    );
+});
+
+storiesOf(`${UiKit}/Button`, module).add("themed button", () => {
+    return withScreenshot(
+        <ThemeProvider
+            adhocTheme={{
+                button: {
+                    borderRadius: "0",
+                },
+                palette: {
+                    primary: {
+                        base: "#0f0",
+                    },
+                },
+            }}
+        >
+            <div className="library-component screenshot-target">
+                <Button className="gd-button-link icon-uploadcloud" value="Deploy process" tagName="a" />
+                <h4>Links</h4>
+                Use <code>a</code> as a tagName.
+                <Button className="gd-button-link icon-uploadcloud" value="Deploy process" tagName="a" />
+                <h4>Buttons</h4>
+                <table className="example-table">
+                    <tbody>
+                        <tr key="header">
+                            <th>Example</th>
+                            <th>ClassNames</th>
+                        </tr>
+                        {getButtons()}
+                    </tbody>
+                </table>
+            </div>
+        </ThemeProvider>,
     );
 });

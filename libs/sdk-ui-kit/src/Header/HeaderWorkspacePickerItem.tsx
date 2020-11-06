@@ -10,6 +10,7 @@ export interface IHeaderWorkspacePickerItemProps {
     isSelected?: boolean;
     isLoading?: boolean;
     onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+    onSettingsClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
     intl: IntlShape;
 }
 
@@ -20,6 +21,7 @@ export const CoreHeaderWorkspacePickerItem: React.FC<IHeaderWorkspacePickerItemP
     isSelected,
     isDemo,
     onClick,
+    onSettingsClick,
 }) => {
     const t = intl.formatMessage;
 
@@ -43,6 +45,11 @@ export const CoreHeaderWorkspacePickerItem: React.FC<IHeaderWorkspacePickerItemP
         <div className={classes} title={title} onClick={onClick}>
             <span className="project-title">{title}</span>
             {isDemo && <span className="demo-sticker">{t({ id: "gs.header.projectPicker.demo" })}</span>}
+            {isSelected && (
+                <span className="project-settings" onClick={onSettingsClick}>
+                    <i className="icon-settings"></i>
+                </span>
+            )}
         </div>
     );
 };

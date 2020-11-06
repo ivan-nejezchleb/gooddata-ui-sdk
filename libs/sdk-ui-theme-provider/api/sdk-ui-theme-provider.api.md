@@ -16,6 +16,7 @@ export interface IThemeContextProviderProps {
 
 // @beta (undocumented)
 export interface IThemeProviderProps {
+    adhocTheme?: ITheme;
     backend?: IAnalyticalBackend;
     workspace?: string;
 }

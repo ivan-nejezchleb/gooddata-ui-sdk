@@ -89,6 +89,8 @@ export {
     IThemePalette,
     IThemeKpi,
     ITheme,
+    IThemeDefinition,
+    IThemeMeta,
 } from "./workspace/styling";
 
 export {

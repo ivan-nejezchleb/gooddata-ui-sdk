@@ -20,6 +20,7 @@ import { IExecutionDefinition } from '@gooddata/sdk-model';
 import { IInsight } from '@gooddata/sdk-model';
 import { ISettings } from '@gooddata/sdk-backend-spi';
 import { ITheme } from '@gooddata/sdk-backend-spi';
+import { IThemeDefinition } from '@gooddata/sdk-backend-spi';
 import { IVisualizationClass } from '@gooddata/sdk-model';
 
 // @internal (undocumented)
@@ -117,7 +118,8 @@ export function recordedBackend(index: RecordingIndex, config?: RecordedBackendC
 export type RecordedBackendConfig = IAnalyticalBackendConfig & {
     globalSettings?: ISettings;
     globalPalette?: IColorPalette;
-    theme?: ITheme;
+    theme?: IThemeDefinition;
+    themes?: ITheme[];
     useRefType?: RecordedRefType;
 };
 

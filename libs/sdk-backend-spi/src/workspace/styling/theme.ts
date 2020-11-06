@@ -157,7 +157,7 @@ export interface IThemeKpi {
  *
  * @beta
  */
-export interface ITheme {
+export interface IThemeDefinition {
     /**
      * Typography
      *
@@ -485,3 +485,50 @@ export interface ITheme {
         };
     };
 }
+
+/**
+ * Themes meta information
+ *
+ * @beta
+ */
+export interface IThemeMeta {
+    /**
+     * Title of Theme
+     */
+    title?: string;
+
+    /**
+     * Unique identifier of the Theme
+     */
+    identifier?: string;
+
+    /**
+     * Link to the Theme.
+     */
+    uri?: string;
+
+    /**
+     * Last update date - YYYY-MM-DD HH:mm:ss
+     *
+     */
+    created?: string;
+
+    /**
+     * Last update date - YYYY-MM-DD HH:mm:ss
+     *
+     */
+    updated?: string;
+
+    /**
+     * Theme is locked for editing & deleting
+     *
+     */
+    isLocked?: boolean;
+}
+
+/**
+ * Whole Theme object
+ *
+ * @beta
+ */
+export type ITheme = IThemeDefinition & IThemeMeta;

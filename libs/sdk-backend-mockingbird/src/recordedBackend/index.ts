@@ -28,6 +28,7 @@ import {
     IWorkspaceDescriptor,
     IWorkspacePermissions,
     ITheme,
+    IThemeDefinition,
 } from "@gooddata/sdk-backend-spi";
 import { IColorPalette } from "@gooddata/sdk-model";
 import { RecordedExecutionFactory } from "./execution";
@@ -153,8 +154,22 @@ function recordedWorkspace(
                 async getColorPalette(): Promise<IColorPalette> {
                     return implConfig.globalPalette ?? [];
                 },
-                async getTheme(): Promise<ITheme> {
+                async getTheme(): Promise<IThemeDefinition> {
                     return implConfig.theme ?? {};
+                },
+                async getThemes(): Promise<ITheme[]> {
+                    if (implConfig.themes) {
+                        return implConfig.themes;
+                    }
+                    if (implConfig.theme) {
+                        return [
+                            {
+                                ...implConfig.theme,
+                                title: "Default theme",
+                            },
+                        ];
+                    }
+                    return [];
                 },
             };
         },

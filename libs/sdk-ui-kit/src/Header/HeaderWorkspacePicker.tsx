@@ -36,6 +36,7 @@ export interface IHeaderWorkspacePickerProps {
     onSearch?: (searchString: string) => void;
     onSelect?: (item: IHeaderWorkspace) => void;
     onScrollEnd?: (visibleRowsStartIndex: number, visibleRowsEndIndex: number) => void;
+    onSettingsClick?: (item: IHeaderWorkspace) => void;
     projectPickerFooter?: React.ReactNode;
 }
 
@@ -62,6 +63,7 @@ export const CoreHeaderWorkspacePicker: React.FC<IHeaderWorkspacePickerProps> = 
     showSearch,
     onOpen,
     onSelect,
+    onSettingsClick,
     onSearch,
     onScrollEnd,
     projectPickerFooter,
@@ -128,6 +130,13 @@ export const CoreHeaderWorkspacePicker: React.FC<IHeaderWorkspacePickerProps> = 
                                 onClick={() => {
                                     if (item && onSelect) {
                                         onSelect(item);
+                                        closeDropdown();
+                                    }
+                                }}
+                                onSettingsClick={(e: any) => {
+                                    e.stopPropagation();
+                                    if (item && onSettingsClick) {
+                                        onSettingsClick(item);
                                         closeDropdown();
                                     }
                                 }}

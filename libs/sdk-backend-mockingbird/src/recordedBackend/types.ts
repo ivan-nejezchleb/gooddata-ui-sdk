@@ -6,6 +6,7 @@ import {
     IAttributeElement,
     ICatalogGroup,
     ISettings,
+    IThemeDefinition,
     ITheme,
 } from "@gooddata/sdk-backend-spi";
 import { IExecutionDefinition, IInsight, IColorPalette, IVisualizationClass } from "@gooddata/sdk-model";
@@ -32,9 +33,14 @@ export type RecordedBackendConfig = IAnalyticalBackendConfig & {
     globalPalette?: IColorPalette;
 
     /**
-     * Specify theme to return
+     * Specify selected theme to return
      */
-    theme?: ITheme;
+    theme?: IThemeDefinition;
+
+    /**
+     * Specify all available themes to return
+     */
+    themes?: ITheme[];
 
     /**
      * Specify which ref type should be added to recorded entities. Recording infrastructure does not

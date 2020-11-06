@@ -374,6 +374,21 @@ export class ProjectModule {
             });
     }
 
+    public setConfig(projectId: string, configName: string, value: string): Promise<ApiResponse> {
+        return this.xhr.put(`/gdc/app/projects/${projectId}/config/${configName}`, {
+            body: {
+                settingItem: {
+                    key: configName,
+                    value,
+                    links: {
+                        self: `/gdc/app/projects/${projectId}/config/${configName}`,
+                    },
+                    source: "project",
+                },
+            },
+        });
+    }
+
     /**
      * Gets project specific feature flags
      *

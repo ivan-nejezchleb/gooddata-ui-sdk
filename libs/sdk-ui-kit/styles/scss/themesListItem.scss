@@ -1,0 +1,106 @@
+// (C) 2020 GoodData Corporation
+.gd-themes-list-loading {
+    width: 300px;
+}
+
+.gd-themes-list-item {
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+
+    .theme-info {
+        flex: 0 0 160px;
+        white-space: break-spaces;
+    }
+
+    .theme-preview {
+        flex: 0 0 120px;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .preview-dash-content {
+        position: relative;
+        flex: 1 0 auto;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .preview-dash-nav {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .preview-dash-nav-selected {
+            height: 10%;
+        }
+    }
+
+    .preview-maincontent {
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .preview-dash-header {
+        height: 10%;
+        flex: 1 0 auto;
+        width: 30%;
+        margin: 1px;
+    }
+
+    .preview-dash-filters-wrapper {
+        height: 15%;
+        flex: 1 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .preview-dash-filter {
+            width: 15%;
+            margin: 2%;
+        }
+    }
+
+    .preview-dash-section {
+        height: 75%;
+        flex: 1 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .preview-dash-kpis {
+        height: 25%;
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: row;
+
+        .preview-dash-kpi {
+            width: 25%;
+            height: 90%;
+            margin: 2%;
+        }
+    }
+
+    .preview-dash-widgets {
+        height: 75%;
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .preview-dash-widget {
+            width: 25%;
+            height: 35%;
+            margin: 2%;
+            background-color: white;
+            border: 1px solid;
+        }
+    }
+}
