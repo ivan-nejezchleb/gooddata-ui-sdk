@@ -3,38 +3,37 @@ import { ITheme } from "@gooddata/sdk-backend-spi";
 
 export const customTheme: ITheme = {
     button: {
-        borderRadius: "15",
+        borderRadius: "2",
         dropShadow: true,
-        textCapitalization: true,
     },
     modal: {
-        borderColor: "#1b4096",
-        borderRadius: "5",
+        borderColor: "#FFF",
+        borderRadius: "6",
         borderWidth: "2",
-        dropShadow: false,
-        outsideBackgroundColor: "#e8cda2",
+        dropShadow: true,
+        outsideBackgroundColor: "#DAE2EA",
         title: {
-            color: "#1b4096",
-            lineColor: "#000",
+            color: "#6D7680",
+            lineColor: "#DAE2EA",
         },
     },
     palette: {
         error: {
-            base: "#ff2e5f",
+            base: "#e54d42",
         },
         primary: {
-            base: "#eba12a",
+            base: "#3049D1",
         },
         success: {
-            base: "#13ed4d",
+            base: "#00c18d",
         },
         warning: {
-            base: "#ddff19",
+            base: "#f4d521",
         },
     },
     tooltip: {
-        backgroundColor: "#101050",
-        color: "#fff",
+        backgroundColor: "#07124E",
+        color: "#C8D0FF",
     },
     typography: {
         font: "url(https://cdn.jsdelivr.net/npm/roboto-font@0.1.0/fonts/Roboto/roboto-regular-webfont.ttf)",
