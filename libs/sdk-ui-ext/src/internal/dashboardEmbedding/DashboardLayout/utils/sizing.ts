@@ -283,7 +283,9 @@ function unifyDashboardLayoutItemHeightsForScreen<TWidget>(
         return items;
     }
 
-    return items.map((item) => updateDashboardLayoutItemHeight(item, screen, maxHeight));
+    const res = items.map((item) => updateDashboardLayoutItemHeight(item, screen, maxHeight));
+    console.log(res);
+    return res;
 }
 
 const updateDashboardLayoutItemHeight = <TWidget>(
@@ -526,6 +528,24 @@ export function getDashboardLayoutWidgetDefaultHeight(
 ): number {
     const sizeInfo = getSizeInfo(settings, widgetType, widgetContent);
     return fluidLayoutDescriptor.toHeightInPx(sizeInfo.height.default);
+}
+
+export function getDashboardLayoutWidgetMinHeight(
+    settings: ISettings,
+    widgetType: WidgetType,
+    widgetContent?: IInsightDefinition | ILegacyKpi,
+): number {
+    const sizeInfo = getSizeInfo(settings, widgetType, widgetContent);
+    return fluidLayoutDescriptor.toHeightInPx(sizeInfo.height.min);
+}
+
+export function getDashboardLayoutWidgetMaxHeight(
+    settings: ISettings,
+    widgetType: WidgetType,
+    widgetContent?: IInsightDefinition | ILegacyKpi,
+): number {
+    const sizeInfo = getSizeInfo(settings, widgetType, widgetContent);
+    return fluidLayoutDescriptor.toHeightInPx(sizeInfo.height.max);
 }
 
 export function getLayoutWithoutGridHeights<TWidget>(
