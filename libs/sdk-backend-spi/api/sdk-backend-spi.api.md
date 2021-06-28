@@ -121,10 +121,10 @@ export type DateString = string;
 export type DrillDefinition = InsightDrillDefinition | KpiDrillDefinition;
 
 // @alpha
-export type DrillOrigin = IDrillFromMeasure;
+export type DrillOrigin = IDrillFromMeasure | IDrillFromAttribute;
 
 // @alpha
-export type DrillOriginType = "drillFromMeasure";
+export type DrillOriginType = "drillFromMeasure" | "drillFromAttribute";
 
 // @alpha
 export type DrillTransition = "pop-up" | "in-place" | "new-window";
@@ -624,6 +624,12 @@ export interface IDrill {
     origin: DrillOrigin;
     transition: DrillTransition;
     type: DrillType;
+}
+
+// @alpha
+export interface IDrillFromAttribute extends IDrillOrigin {
+    attribute: ObjRefInScope;
+    type: "drillFromAttribute";
 }
 
 // @alpha
