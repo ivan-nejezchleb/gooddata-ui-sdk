@@ -163,6 +163,7 @@ export {
     DrillType,
     IDrill,
     IDrillFromMeasure,
+    IDrillFromAttribute,
     IDrillOrigin,
     IDrillToDashboard,
     IDrillToInsight,

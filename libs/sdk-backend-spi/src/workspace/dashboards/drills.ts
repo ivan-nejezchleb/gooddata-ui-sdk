@@ -29,13 +29,13 @@ export type DrillDefinition = InsightDrillDefinition | KpiDrillDefinition;
  * Drill origin type
  * @alpha
  */
-export type DrillOriginType = "drillFromMeasure";
+export type DrillOriginType = "drillFromMeasure" | "drillFromAttribute";
 
 /**
  * Drill origin
  * @alpha
  */
-export type DrillOrigin = IDrillFromMeasure;
+export type DrillOrigin = IDrillFromMeasure | IDrillFromAttribute;
 
 /**
  * Drill transition
@@ -112,6 +112,22 @@ export interface IDrillFromMeasure extends IDrillOrigin {
      * Measure object ref
      */
     measure: ObjRefInScope;
+}
+
+/**
+ * Drill from attribute
+ * @alpha
+ */
+export interface IDrillFromAttribute extends IDrillOrigin {
+    /**
+     * Drill origin type
+     */
+    type: "drillFromAttribute";
+
+    /**
+     * Attribute object ref
+     */
+    attribute: ObjRefInScope;
 }
 
 /**
