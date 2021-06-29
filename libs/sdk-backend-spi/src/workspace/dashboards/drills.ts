@@ -118,7 +118,7 @@ export interface IDrillFromMeasure extends IDrillOrigin {
  * Type-guard testing whether the provided object is an instance of {@link IDrillFromMeasure}.
  * @alpha
  */
-export function isDrillFromMeasure(obj: unknown): obj is IDrillFromMeasure {
+export function isDrillFromMeasure(obj: DrillOrigin): obj is IDrillFromMeasure {
     return !isEmpty(obj) && (obj as IDrillFromMeasure).type === "drillFromMeasure";
 }
 
@@ -142,7 +142,7 @@ export interface IDrillFromAttribute extends IDrillOrigin {
  * Type-guard testing whether the provided object is an instance of {@link IDrillFromAttribute}.
  * @alpha
  */
-export function isDrillFromAttribute(obj: unknown): obj is IDrillFromAttribute {
+export function isDrillFromAttribute(obj: DrillOrigin): obj is IDrillFromAttribute {
     return !isEmpty(obj) && (obj as IDrillFromAttribute).type === "drillFromAttribute";
 }
 

@@ -93,11 +93,11 @@ export namespace GdcVisualizationWidget {
         return !isEmpty(obj) && !!(obj as IDrillToAttributeUrl).drillToAttributeUrl;
     }
 
-    export function isDrillFromMeasure(obj: unknown): obj is IDrillFromMeasure {
+    export function isDrillFromMeasure(obj: DrillFrom): obj is IDrillFromMeasure {
         return !isEmpty(obj) && !!(obj as IDrillFromMeasure).drillFromMeasure;
     }
 
-    export function isDrillFromAttribute(obj: unknown): obj is IDrillFromAttribute {
+    export function isDrillFromAttribute(obj: DrillFrom): obj is IDrillFromAttribute {
         return !isEmpty(obj) && !!(obj as IDrillFromAttribute).drillFromAttribute;
     }
 
