@@ -115,6 +115,14 @@ export interface IDrillFromMeasure extends IDrillOrigin {
 }
 
 /**
+ * Type-guard testing whether the provided object is an instance of {@link IDrillFromMeasure}.
+ * @alpha
+ */
+export function isDrillFromMeasure(obj: unknown): obj is IDrillFromMeasure {
+    return !isEmpty(obj) && (obj as IDrillFromMeasure).type === "drillFromMeasure";
+}
+
+/**
  * Drill from attribute
  * @alpha
  */
@@ -128,6 +136,14 @@ export interface IDrillFromAttribute extends IDrillOrigin {
      * Attribute object ref
      */
     attribute: ObjRefInScope;
+}
+
+/**
+ * Type-guard testing whether the provided object is an instance of {@link IDrillFromAttribute}.
+ * @alpha
+ */
+export function isDrillFromAttribute(obj: unknown): obj is IDrillFromAttribute {
+    return !isEmpty(obj) && (obj as IDrillFromAttribute).type === "drillFromAttribute";
 }
 
 /**
