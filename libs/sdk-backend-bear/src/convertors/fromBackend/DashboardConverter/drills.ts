@@ -30,7 +30,7 @@ export const convertKpiDrill = (kpi: GdcKpi.IWrappedKPI): IDrillToLegacyDashboar
     return drillDefinition;
 };
 
-const convertDrillOrigin = (from: GdcVisualizationWidget.DrillFrom): DrillOrigin => {
+export const convertDrillOrigin = (from: GdcVisualizationWidget.DrillFrom): DrillOrigin => {
     if (GdcVisualizationWidget.isDrillFromMeasure(from)) {
         return {
             type: "drillFromMeasure",

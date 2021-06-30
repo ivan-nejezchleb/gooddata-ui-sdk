@@ -1187,6 +1187,12 @@ export function isDataTooLargeError(obj: unknown): obj is DataTooLargeError;
 export const isDateFilterGranularity: (obj: unknown) => obj is DateFilterGranularity;
 
 // @alpha
+export function isDrillFromAttribute(obj: DrillOrigin): obj is IDrillFromAttribute;
+
+// @alpha
+export function isDrillFromMeasure(obj: DrillOrigin): obj is IDrillFromMeasure;
+
+// @alpha
 export function isDrillToAttributeUrl(obj: unknown): obj is IDrillToAttributeUrl;
 
 // @alpha
