@@ -2797,7 +2797,7 @@ export namespace GdcVisualizationObject {
 // @public (undocumented)
 export namespace GdcVisualizationWidget {
     // (undocumented)
-    export type DrillFrom = IDrillFromMeasure | IDrillFromAttribute;
+    export type DrillFromType = IDrillFromMeasure | IDrillFromAttribute;
     // (undocumented)
     export type IDrillDefinition = IDrillToVisualization | IDrillToDashboard | IDrillToCustomUrl | IDrillToAttributeUrl;
     // (undocumented)
@@ -2815,7 +2815,7 @@ export namespace GdcVisualizationWidget {
         // (undocumented)
         drillToAttributeUrl: {
             target: "new-window";
-            from: DrillFrom;
+            from: DrillFromType;
             insightAttributeDisplayForm: GdcVisualizationObject.IObjUriQualifier;
             drillToAttributeDisplayForm: GdcVisualizationObject.IObjUriQualifier;
         };
@@ -2825,7 +2825,7 @@ export namespace GdcVisualizationWidget {
         // (undocumented)
         drillToCustomUrl: {
             target: "new-window";
-            from: DrillFrom;
+            from: DrillFromType;
             customUrl: string;
         };
     }
@@ -2834,7 +2834,7 @@ export namespace GdcVisualizationWidget {
         // (undocumented)
         drillToDashboard: {
             target: "in-place";
-            from: DrillFrom;
+            from: DrillFromType;
             toDashboard?: Identifier;
         };
     }
@@ -2843,14 +2843,14 @@ export namespace GdcVisualizationWidget {
         // (undocumented)
         drillToVisualization: {
             target: "pop-up";
-            from: DrillFrom;
+            from: DrillFromType;
             toVisualization: GdcVisualizationObject.IObjUriQualifier;
         };
     }
     // (undocumented)
-    export function isDrillFromAttribute(obj: DrillFrom): obj is IDrillFromAttribute;
+    export function isDrillFromAttribute(obj: DrillFromType): obj is IDrillFromAttribute;
     // (undocumented)
-    export function isDrillFromMeasure(obj: DrillFrom): obj is IDrillFromMeasure;
+    export function isDrillFromMeasure(obj: DrillFromType): obj is IDrillFromMeasure;
     // (undocumented)
     export function isDrillToAttributeUrl(obj: unknown): obj is IDrillToAttributeUrl;
     // (undocumented)
