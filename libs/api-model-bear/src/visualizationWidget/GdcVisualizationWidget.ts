@@ -34,7 +34,7 @@ export namespace GdcVisualizationWidget {
         | IDrillToCustomUrl
         | IDrillToAttributeUrl;
 
-    export type DrillFrom = IDrillFromMeasure | IDrillFromAttribute;
+    export type DrillFromType = IDrillFromMeasure | IDrillFromAttribute;
 
     export interface IDrillFromMeasure {
         drillFromMeasure: GdcVisualizationObject.ILocalIdentifierQualifier;
@@ -47,7 +47,7 @@ export namespace GdcVisualizationWidget {
     export interface IDrillToVisualization {
         drillToVisualization: {
             target: "pop-up";
-            from: DrillFrom;
+            from: DrillFromType;
             toVisualization: GdcVisualizationObject.IObjUriQualifier;
         };
     }
@@ -55,7 +55,7 @@ export namespace GdcVisualizationWidget {
     export interface IDrillToDashboard {
         drillToDashboard: {
             target: "in-place";
-            from: DrillFrom;
+            from: DrillFromType;
             toDashboard?: Identifier;
         };
     }
@@ -63,7 +63,7 @@ export namespace GdcVisualizationWidget {
     export interface IDrillToCustomUrl {
         drillToCustomUrl: {
             target: "new-window";
-            from: DrillFrom;
+            from: DrillFromType;
             customUrl: string;
         };
     }
@@ -71,7 +71,7 @@ export namespace GdcVisualizationWidget {
     export interface IDrillToAttributeUrl {
         drillToAttributeUrl: {
             target: "new-window";
-            from: DrillFrom;
+            from: DrillFromType;
             insightAttributeDisplayForm: GdcVisualizationObject.IObjUriQualifier;
             drillToAttributeDisplayForm: GdcVisualizationObject.IObjUriQualifier;
         };
@@ -93,11 +93,11 @@ export namespace GdcVisualizationWidget {
         return !isEmpty(obj) && !!(obj as IDrillToAttributeUrl).drillToAttributeUrl;
     }
 
-    export function isDrillFromMeasure(obj: DrillFrom): obj is IDrillFromMeasure {
+    export function isDrillFromMeasure(obj: DrillFromType): obj is IDrillFromMeasure {
         return !isEmpty(obj) && !!(obj as IDrillFromMeasure).drillFromMeasure;
     }
 
-    export function isDrillFromAttribute(obj: DrillFrom): obj is IDrillFromAttribute {
+    export function isDrillFromAttribute(obj: DrillFromType): obj is IDrillFromAttribute {
         return !isEmpty(obj) && !!(obj as IDrillFromAttribute).drillFromAttribute;
     }
 

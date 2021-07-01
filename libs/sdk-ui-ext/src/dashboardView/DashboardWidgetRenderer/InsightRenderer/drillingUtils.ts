@@ -6,6 +6,7 @@ import {
     ICatalogDateAttribute,
     isDrillFromAttribute,
     isDrillFromMeasure,
+    UnexpectedError,
 } from "@gooddata/sdk-backend-spi";
 import { isLocalIdRef, isIdentifierRef, isUriRef, areObjRefsEqual, ObjRefInScope } from "@gooddata/sdk-model";
 import { HeaderPredicates, IAvailableDrillTargetAttribute, IHeaderPredicate } from "@gooddata/sdk-ui";
@@ -22,6 +23,8 @@ function widgetDrillToDrillPredicates(drill: DrillDefinition): IHeaderPredicate[
         origin = drill.origin.measure;
     } else if (isDrillFromAttribute(drill.origin)) {
         origin = drill.origin.attribute;
+    } else {
+        throw new UnexpectedError("Unknown drill origin!");
     }
 
     // add drillable items for all three types of objRefs that the origin measure can be

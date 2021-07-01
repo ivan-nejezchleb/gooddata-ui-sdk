@@ -338,7 +338,7 @@ export function convertDrill(
     }
 
     const { origin } = drill;
-    let drillFrom: GdcVisualizationWidget.DrillFrom;
+    let drillFrom: GdcVisualizationWidget.DrillFromType;
     if (isDrillFromMeasure(origin)) {
         const { measure } = origin;
         drillFrom = {
