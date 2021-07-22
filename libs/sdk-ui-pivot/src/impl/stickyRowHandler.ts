@@ -116,15 +116,19 @@ export function updateStickyRowContentClassesAndData(
         return data;
     }, {});
     // set new rowData only if differen to avoid rerendering and flashing of the sticky row
-    if (areDataDifferent(previousStickyData, stickyRowData)) {
+    if (
+        areDataDifferent(previousStickyData, stickyRowData) ||
+        firstVisibleRowIndex !== previousRowData.firstVisibleRowIndex
+    ) {
         const stickyHeaderItemMapProp = isEmpty(headerItemMap)
             ? { stickyHeaderItemMap: {} }
             : { stickyHeaderItemMap: headerItemMap };
         gridApi.setPinnedTopRowData([
             {
                 ...stickyRowData,
-                ...firstVisibleNodeData,
                 ...stickyHeaderItemMapProp,
+                headerItemMap: firstVisibleNodeData.headerItemMap,
+                firstVisibleRowIndex,
             },
         ]);
     }

@@ -1,7 +1,7 @@
 // (C) 2007-2021 GoodData Corporation
 import { TableFacade } from "../tableFacade";
 import { ICorePivotTableProps } from "../../publicTypes";
-import { CellEvent } from "@ag-grid-community/all-modules";
+import { CellEvent, ColDef } from "@ag-grid-community/all-modules";
 import { invariant } from "ts-invariant";
 import { IGridRow } from "../data/resultTypes";
 import { isSomeTotal } from "../data/dataSourceUtils";
@@ -33,7 +33,11 @@ export function onCellClickedFactory(
             return false;
         }
 
-        const { colDef, data, rowIndex } = cellEvent;
+        const {
+            colDef,
+            data,
+            rowIndex: eventRowIndex,
+        }: { colDef: ColDef; data: IGridRow; rowIndex: number } = cellEvent;
         const col = table.tableDescriptor.getCol(colDef);
 
         // cells belong to either slice column or leaf data column; if cells belong to column of a different
@@ -50,12 +54,19 @@ export function onCellClickedFactory(
             return false;
         }
 
+        const isTopPinned = cellEvent.node.rowPinned === "top";
+        const rowIndex =
+            isTopPinned && data.firstVisibleRowIndex !== undefined
+                ? data.firstVisibleRowIndex
+                : eventRowIndex;
+        const rowData: IGridRow = cellEvent.api.getDisplayedRowAtIndex(rowIndex).data;
+
         const drillContext: IDrillEventContextTable = {
             type: VisualizationTypes.TABLE,
             element: "cell",
             columnIndex: table.tableDescriptor.getAbsoluteLeafColIndex(col),
             rowIndex,
-            row: createDrilledRow(data as IGridRow, table.tableDescriptor),
+            row: createDrilledRow(rowData, table.tableDescriptor),
             intersection: createDrillIntersection(cellEvent, table.tableDescriptor),
         };
         const drillEvent: IDrillEvent = {

@@ -25,6 +25,20 @@ export interface IGridRow {
     };
 
     /**
+     * Sticky row specific data
+     */
+    /**
+     * Mapping of columns shown in sticky row at this moment
+     */
+    stickyHeaderItemMap?: {
+        [key: string]: IMappingHeader;
+    };
+    /**
+     * Index of row currently shown in sticky header, used in drill paylod in case of drilling from sticky value
+     */
+    firstVisibleRowIndex?: number;
+
+    /**
      * If this is 'special' row such as total or subtotal, then the 'type' will be set to value of
      * ROW_TOTAL or ROW_SUBTOTAL constant. Otherwise the field is not present.
      */
