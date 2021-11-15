@@ -7,7 +7,8 @@ import { ShareDialog } from "@gooddata/sdk-ui-kit";
  * @internal
  */
 export const DefaultShareDialogInner = (): JSX.Element | null => {
-    const { isVisible, sharedObject, currentUserRef, onApply, onCancel } = useShareDialogProps();
+    const { workspace, backend, isVisible, sharedObject, currentUserRef, onApply, onCancel } =
+        useShareDialogProps();
 
     if (!isVisible) {
         return null;
@@ -15,6 +16,8 @@ export const DefaultShareDialogInner = (): JSX.Element | null => {
 
     return (
         <ShareDialog
+            backend={backend}
+            workspace={workspace}
             sharedObject={sharedObject}
             currentUserRef={currentUserRef}
             onApply={onApply}

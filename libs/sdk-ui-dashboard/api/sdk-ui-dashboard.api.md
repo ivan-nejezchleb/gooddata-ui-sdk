@@ -2880,11 +2880,13 @@ export interface IShareButtonProps {
 
 // @alpha (undocumented)
 export interface IShareDialogProps {
+    backend: IAnalyticalBackend;
     currentUserRef: ObjRef;
     isVisible?: boolean;
     onApply: (payload: ISharingApplyPayload) => void;
     onCancel: () => void;
     sharedObject: IAccessControlAware & IAuditableUsers;
+    workspace: string;
 }
 
 // @alpha
