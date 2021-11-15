@@ -2,7 +2,14 @@
 import React, { useCallback, useMemo } from "react";
 import { IDashboardAttributeFilter, IInsightWidget, IKpiWidget, ILegacyKpi } from "@gooddata/sdk-backend-spi";
 import { ToastMessageContextProvider } from "@gooddata/sdk-ui-kit";
-import { ErrorComponent as DefaultError, LoadingComponent as DefaultLoading } from "@gooddata/sdk-ui";
+import {
+    BackendProvider,
+    ErrorComponent as DefaultError,
+    LoadingComponent as DefaultLoading,
+    useBackendStrict,
+    useWorkspaceStrict,
+    WorkspaceProvider,
+} from "@gooddata/sdk-ui";
 import { ThemeProvider, useThemeIsLoading } from "@gooddata/sdk-ui-theme-provider";
 
 import {
@@ -123,6 +130,9 @@ const DashboardLoading: React.FC<IDashboardProps> = (props: IDashboardProps) => 
  * @internal
  */
 export const Dashboard: React.FC<IDashboardProps> = (props: IDashboardProps) => {
+    const backend = useBackendStrict(props.backend);
+    const workspace = useWorkspaceStrict(props.workspace);
+
     const attributeFilterProvider = useCallback(
         (filter: IDashboardAttributeFilter): CustomDashboardAttributeFilterComponent => {
             const userSpecified = props.DashboardAttributeFilterComponentProvider?.(filter);
@@ -183,55 +193,64 @@ export const Dashboard: React.FC<IDashboardProps> = (props: IDashboardProps) => 
     const hasThemeProvider = isThemeLoading !== undefined;
 
     let dashboardRender = (
-        <DashboardStoreProvider
-            backend={props.backend}
-            workspace={props.workspace}
-            dashboard={props.dashboard}
-            filterContextRef={props.filterContextRef}
-            eventHandlers={props.eventHandlers}
-            config={props.config}
-            permissions={props.permissions}
-            onStateChange={props.onStateChange}
-            onEventingInitialized={props.onEventingInitialized}
-            customizationFns={props.customizationFns}
-        >
-            <ToastMessageContextProvider>
-                <ExportDialogContextProvider>
-                    <DashboardCustomizationsProvider
-                        insightMenuItemsProvider={props.insightMenuItemsProvider}
-                    >
-                        <DashboardComponentsProvider
-                            ErrorComponent={props.ErrorComponent ?? DefaultError}
-                            LoadingComponent={props.LoadingComponent ?? DefaultLoading}
-                            LayoutComponent={props.LayoutComponent ?? DefaultDashboardLayoutInner}
-                            InsightComponentProvider={insightProvider}
-                            InsightMenuButtonComponentProvider={insightMenuButtonProvider}
-                            InsightMenuComponentProvider={insightMenuProvider}
-                            KpiComponentProvider={kpiProvider}
-                            WidgetComponentProvider={widgetProvider}
-                            ButtonBarComponent={props.ButtonBarComponent ?? DefaultButtonBarInner}
-                            MenuButtonComponent={props.MenuButtonComponent ?? DefaultMenuButtonInner}
-                            TopBarComponent={props.TopBarComponent ?? DefaultTopBarInner}
-                            TitleComponent={props.TitleComponent ?? DefaultTitleInner}
-                            ScheduledEmailDialogComponent={
-                                props.ScheduledEmailDialogComponent ?? DefaultScheduledEmailDialogInner
-                            }
-                            ShareDialogComponent={props.ShareDialogComponent ?? DefaultShareDialogInner}
-                            SaveAsDialogComponent={props.SaveAsDialogComponent ?? DefaultSaveAsDialogInner}
-                            DashboardAttributeFilterComponentProvider={attributeFilterProvider}
-                            DashboardDateFilterComponent={
-                                props.DashboardDateFilterComponent ?? DefaultDashboardDateFilterInner
-                            }
-                            FilterBarComponent={props.FilterBarComponent ?? DefaultFilterBarInner}
-                        >
-                            <DashboardConfigProvider menuButtonConfig={props.menuButtonConfig}>
-                                <DashboardLoading {...props} />
-                            </DashboardConfigProvider>
-                        </DashboardComponentsProvider>
-                    </DashboardCustomizationsProvider>
-                </ExportDialogContextProvider>
-            </ToastMessageContextProvider>
-        </DashboardStoreProvider>
+        <BackendProvider backend={backend}>
+            <WorkspaceProvider workspace={workspace}>
+                <DashboardStoreProvider
+                    backend={backend}
+                    workspace={workspace}
+                    dashboard={props.dashboard}
+                    filterContextRef={props.filterContextRef}
+                    eventHandlers={props.eventHandlers}
+                    config={props.config}
+                    permissions={props.permissions}
+                    onStateChange={props.onStateChange}
+                    onEventingInitialized={props.onEventingInitialized}
+                    customizationFns={props.customizationFns}
+                >
+                    <ToastMessageContextProvider>
+                        <ExportDialogContextProvider>
+                            <DashboardCustomizationsProvider
+                                insightMenuItemsProvider={props.insightMenuItemsProvider}
+                            >
+                                <DashboardComponentsProvider
+                                    ErrorComponent={props.ErrorComponent ?? DefaultError}
+                                    LoadingComponent={props.LoadingComponent ?? DefaultLoading}
+                                    LayoutComponent={props.LayoutComponent ?? DefaultDashboardLayoutInner}
+                                    InsightComponentProvider={insightProvider}
+                                    InsightMenuButtonComponentProvider={insightMenuButtonProvider}
+                                    InsightMenuComponentProvider={insightMenuProvider}
+                                    KpiComponentProvider={kpiProvider}
+                                    WidgetComponentProvider={widgetProvider}
+                                    ButtonBarComponent={props.ButtonBarComponent ?? DefaultButtonBarInner}
+                                    MenuButtonComponent={props.MenuButtonComponent ?? DefaultMenuButtonInner}
+                                    TopBarComponent={props.TopBarComponent ?? DefaultTopBarInner}
+                                    TitleComponent={props.TitleComponent ?? DefaultTitleInner}
+                                    ScheduledEmailDialogComponent={
+                                        props.ScheduledEmailDialogComponent ??
+                                        DefaultScheduledEmailDialogInner
+                                    }
+                                    ShareDialogComponent={
+                                        props.ShareDialogComponent ?? DefaultShareDialogInner
+                                    }
+                                    SaveAsDialogComponent={
+                                        props.SaveAsDialogComponent ?? DefaultSaveAsDialogInner
+                                    }
+                                    DashboardAttributeFilterComponentProvider={attributeFilterProvider}
+                                    DashboardDateFilterComponent={
+                                        props.DashboardDateFilterComponent ?? DefaultDashboardDateFilterInner
+                                    }
+                                    FilterBarComponent={props.FilterBarComponent ?? DefaultFilterBarInner}
+                                >
+                                    <DashboardConfigProvider menuButtonConfig={props.menuButtonConfig}>
+                                        <DashboardLoading {...props} />
+                                    </DashboardConfigProvider>
+                                </DashboardComponentsProvider>
+                            </DashboardCustomizationsProvider>
+                        </ExportDialogContextProvider>
+                    </ToastMessageContextProvider>
+                </DashboardStoreProvider>
+            </WorkspaceProvider>
+        </BackendProvider>
     );
 
     if (props.theme || !hasThemeProvider) {
