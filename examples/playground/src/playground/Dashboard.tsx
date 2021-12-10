@@ -34,5 +34,5 @@ export const PlayDashboard: React.FC<IPlayDashboardProps> = (props) => {
         return <ErrorComponent message={dashboardError.message || "DashboardComponent is empty."} />;
     }
 
-    return <DashboardComponent />;
+    return <DashboardComponent {...dashboardResult!.props} />;
 };
