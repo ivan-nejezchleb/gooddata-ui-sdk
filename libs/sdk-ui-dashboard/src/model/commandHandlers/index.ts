@@ -55,6 +55,7 @@ import { resolveAsyncRenderHandler } from "./render/resolveAsyncRenderHandler";
 import { DashboardContext } from "../types/commonTypes";
 import { dispatchDashboardEvent } from "../store/_infra/eventDispatcher";
 import { commandRejected } from "../events/general";
+import { setRenderModeHandler } from "./dashboard/setRenderModeHandler";
 
 function* notImplementedCommand(ctx: DashboardContext, cmd: IDashboardCommand): SagaIterator<void> {
     yield dispatchDashboardEvent(commandRejected(ctx, cmd.correlationId));
@@ -117,4 +118,5 @@ export const DefaultCommandHandlers: {
     "GDC.DASH/CMD.DRILL_TARGETS.ADD": addDrillTargetsHandler,
     "GDC.DASH/CMD.RENDER.ASYNC.REQUEST": requestAsyncRenderHandler,
     "GDC.DASH/CMD.RENDER.ASYNC.RESOLVE": resolveAsyncRenderHandler,
+    "GDC.DASH/CMD.RENDER.MODE.CHANGE": setRenderModeHandler,
 };

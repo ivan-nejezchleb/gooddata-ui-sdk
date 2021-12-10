@@ -2337,7 +2337,7 @@ export interface IDashboardThemingProps {
 
 // @public (undocumented)
 export interface IDashboardWidgetCustomizer {
-    addCustomWidget(widgetType: string, Component: CustomDashboardWidgetComponent): IDashboardWidgetCustomizer;
+    addCustomWidget(widgetType: string, Component: CustomDashboardWidgetComponent, EditComponent?: CustomDashboardWidgetComponent): IDashboardWidgetCustomizer;
 }
 
 // @public
