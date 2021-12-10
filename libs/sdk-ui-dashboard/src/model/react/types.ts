@@ -3,7 +3,7 @@ import { IAnalyticalBackend, IDashboard, IWorkspacePermissions } from "@gooddata
 import { ObjRef } from "@gooddata/sdk-model";
 import { DashboardEventHandler } from "../eventHandlers/eventHandler";
 import { DashboardDispatch, DashboardState } from "../store";
-import { DashboardConfig, DashboardModelCustomizationFns } from "../types/commonTypes";
+import { DashboardConfig, DashboardModelCustomizationFns, DashboardCheckFns } from "../types/commonTypes";
 import React from "react";
 import { ReactReduxContextValue } from "react-redux";
 
@@ -26,5 +26,5 @@ export interface IDashboardStoreProviderProps {
         unregisterEventHandler: (handler: DashboardEventHandler) => void,
     ) => void;
     additionalReduxContext?: React.Context<ReactReduxContextValue>;
-    customizationFns?: DashboardModelCustomizationFns;
+    customizationFns?: DashboardModelCustomizationFns & DashboardCheckFns;
 }

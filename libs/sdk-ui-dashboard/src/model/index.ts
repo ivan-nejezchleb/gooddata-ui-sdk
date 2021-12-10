@@ -26,6 +26,8 @@ export {
     IResolvedDateFilterValue,
     IResolvedFilterValues,
     RenderMode,
+    DashboardCheckFns,
+    CheckRenderModeSwitchFn,
 } from "./types/commonTypes";
 export {
     ICustomWidget,

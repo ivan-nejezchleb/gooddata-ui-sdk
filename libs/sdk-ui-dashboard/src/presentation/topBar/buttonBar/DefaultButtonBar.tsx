@@ -22,8 +22,6 @@ export const DefaultButtonBar: React.FC<PropsWithChildren<IButtonBarProps>> = (p
 
     const isEditMode = renderMode === "edit";
 
-    console.log("isEditMode", isEditMode);
-
     const onEditClick = () => {
         dispatch(changeRenderMode(isEditMode ? "view" : "edit"));
     };

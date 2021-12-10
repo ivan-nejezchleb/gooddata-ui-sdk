@@ -454,6 +454,9 @@ export interface ChangeSharing extends IDashboardCommand {
 // @alpha
 export function changeSharing(newShareProps: ISharingApplyPayload_2, correlationId?: string): ChangeSharing;
 
+// @public (undocumented)
+export type CheckRenderModeSwitchFn = (current: RenderMode, next: RenderMode) => string | boolean | Promise<string> | Promise<boolean>;
+
 // @alpha
 export function clearDateFilterSelection(correlationId?: string): ChangeDateFilterSelection;
 
@@ -661,6 +664,11 @@ export interface DashboardAttributeFilterSelectionChanged extends IDashboardEven
     // (undocumented)
     readonly type: "GDC.DASH/EVT.FILTER_CONTEXT.ATTRIBUTE_FILTER.SELECTION_CHANGED";
 }
+
+// @public (undocumented)
+export type DashboardCheckFns = {
+    checkRenderModeSwitch?: CheckRenderModeSwitchFn;
+};
 
 // @alpha
 export interface DashboardCommandFailed<TCommand extends IDashboardCommand = IDashboardCommand> extends IDashboardEvent {
@@ -2075,7 +2083,7 @@ export interface IDashboardCustomComponentProps {
 
 // @public
 export interface IDashboardCustomizationProps extends IDashboardCustomComponentProps {
-    customizationFns?: DashboardModelCustomizationFns;
+    customizationFns?: DashboardModelCustomizationFns & DashboardCheckFns;
     // @alpha
     insightMenuItemsProvider?: InsightMenuItemsProvider;
     // @alpha
@@ -2311,7 +2319,7 @@ export interface IDashboardStoreProviderProps {
     // (undocumented)
     config?: DashboardConfig;
     // (undocumented)
-    customizationFns?: DashboardModelCustomizationFns;
+    customizationFns?: DashboardModelCustomizationFns & DashboardCheckFns;
     // (undocumented)
     dashboard?: ObjRef | IDashboard;
     // (undocumented)

@@ -21,6 +21,7 @@ import {
     DashboardState,
     ExtendedDashboardWidget,
     RenderMode,
+    DashboardCheckFns,
 } from "../../model";
 import {
     CustomDashboardAttributeFilterComponent,
@@ -367,7 +368,7 @@ export interface IDashboardCustomizationProps extends IDashboardCustomComponentP
      *
      * @public
      */
-    customizationFns?: DashboardModelCustomizationFns;
+    customizationFns?: DashboardModelCustomizationFns & DashboardCheckFns;
 }
 
 /**

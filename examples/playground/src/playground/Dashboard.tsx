@@ -77,5 +77,12 @@ export const PlayDashboard: React.FC<IPlayDashboardProps> = (props) => {
         return <ErrorComponent message={dashboardError.message || "DashboardComponent is empty."} />;
     }
 
-    return <DashboardComponent {...dashboardResult!.props} />;
+    return (
+        <DashboardComponent
+            {...dashboardResult!.props}
+            customizationFns={{
+                checkRenderModeSwitch: () => (Math.random() > 0.5 ? "nasrat" : true),
+            }}
+        />
+    );
 };

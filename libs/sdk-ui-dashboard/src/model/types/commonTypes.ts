@@ -198,13 +198,14 @@ export type DashboardContext = {
 /**
  * @internal
  */
-export type PrivateDashboardContext = DashboardModelCustomizationFns & {
-    /**
-     * If specified, the dashboard initialization should use this dashboard definition instead of
-     * loading dashboard from backend.
-     */
-    preloadedDashboard?: IDashboard;
-};
+export type PrivateDashboardContext = DashboardModelCustomizationFns &
+    DashboardCheckFns & {
+        /**
+         * If specified, the dashboard initialization should use this dashboard definition instead of
+         * loading dashboard from backend.
+         */
+        preloadedDashboard?: IDashboard;
+    };
 
 /**
  * @public
@@ -227,6 +228,29 @@ export type DashboardModelCustomizationFns = {
      *    dashboard will be used as-is.
      */
     existingDashboardTransformFn?: DashboardTransformFn;
+};
+
+/**
+ * @public
+ */
+export type CheckRenderModeSwitchFn = (
+    current: RenderMode,
+    next: RenderMode,
+) => string | boolean | Promise<string> | Promise<boolean>;
+
+/**
+ * @public
+ */
+export type DashboardCheckFns = {
+    /**
+     * Optionally provide a function that will be used during dashboard state changes
+     * This function will be called before particular changes of dashboard state
+     * and can stop such transition
+     *
+     * @remarks
+     * -  If the function is defined and results in string or false then render mode switch is stopped
+     */
+    checkRenderModeSwitch?: CheckRenderModeSwitchFn;
 };
 
 /**
