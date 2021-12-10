@@ -277,3 +277,10 @@ export type FiltersInfo = {
     filters: IDashboardFilter[];
     resolvedFilterValues?: IResolvedFilterValues;
 };
+
+/**
+ * Contains information about dashboard current mode.
+ *
+ * @alpha
+ */
+export type RenderMode = "view" | "edit";
