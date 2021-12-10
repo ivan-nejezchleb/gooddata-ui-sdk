@@ -9,6 +9,7 @@ import {
     ExportDashboardToPdf,
     DeleteDashboard,
     ChangeSharing,
+    ChangeRenderMode,
 } from "./dashboard";
 import { TriggerEvent } from "./events";
 import { UpsertExecutionResult } from "./executionResults";
@@ -268,4 +269,5 @@ export type DashboardCommands =
     | DrillToLegacyDashboard
     | ChangeDrillableItems
     | AddDrillTargets
-    | ChangeSharing;
+    | ChangeSharing
+    | ChangeRenderMode;
