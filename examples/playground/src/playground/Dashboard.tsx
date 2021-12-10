@@ -81,7 +81,10 @@ export const PlayDashboard: React.FC<IPlayDashboardProps> = (props) => {
         <DashboardComponent
             {...dashboardResult!.props}
             customizationFns={{
-                checkRenderModeSwitch: () => (Math.random() > 0.5 ? "nasrat" : true),
+                ...dashboardResult!.props.customizationFns,
+                checkRenderModeSwitch: () => {
+                    return Math.random() > 0.5 ? "nasrat" : true;
+                },
             }}
             config={{ initialRenderMode: "edit" }}
         />
