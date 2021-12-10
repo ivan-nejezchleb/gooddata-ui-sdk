@@ -429,6 +429,19 @@ export interface ChangeLayoutSectionHeader extends IDashboardCommand {
 export function changeLayoutSectionHeader(index: number, header: IDashboardLayoutSectionHeader, merge?: boolean, correlationId?: string): ChangeLayoutSectionHeader;
 
 // @alpha (undocumented)
+export interface ChangeRenderMode extends IDashboardCommand {
+    // (undocumented)
+    readonly payload: {
+        readonly newRenderMode: RenderMode;
+    };
+    // (undocumented)
+    readonly type: "GDC.DASH/CMD.RENDER.MODE.CHANGE";
+}
+
+// @alpha
+export function changeRenderMode(newRenderMode: RenderMode): ChangeRenderMode;
+
+// @alpha (undocumented)
 export interface ChangeSharing extends IDashboardCommand {
     // (undocumented)
     readonly payload: {

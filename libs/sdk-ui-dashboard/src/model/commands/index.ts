@@ -84,6 +84,8 @@ export {
     deleteDashboard,
     ChangeSharing,
     changeSharing,
+    ChangeRenderMode,
+    changeRenderMode,
 } from "./dashboard";
 export { TriggerEvent, triggerEvent } from "./events";
 export {
