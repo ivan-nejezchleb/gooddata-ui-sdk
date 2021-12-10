@@ -2,6 +2,7 @@
 import React, { useMemo } from "react";
 
 import { useDashboardComponentsContext } from "../../dashboardContexts";
+import { selectRenderMode, useDashboardSelector } from "../../../model";
 import { IDashboardInsightProps } from "./types";
 
 /**
@@ -10,8 +11,7 @@ import { IDashboardInsightProps } from "./types";
 export const DashboardInsight = (props: IDashboardInsightProps): JSX.Element => {
     const { insight, widget } = props;
     const { InsightComponentProvider } = useDashboardComponentsContext();
-    // TODO select from state
-    const renderMode = "view";
+    const renderMode = useDashboardSelector(selectRenderMode);
     const InsightComponent = useMemo(
         () => InsightComponentProvider(insight, widget, renderMode),
         [InsightComponentProvider, insight, widget, renderMode],

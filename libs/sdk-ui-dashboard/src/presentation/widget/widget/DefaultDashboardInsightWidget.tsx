@@ -6,7 +6,7 @@ import { insightVisualizationUrl } from "@gooddata/sdk-model";
 import { IInsightWidget, ScreenSize, widgetTitle } from "@gooddata/sdk-backend-spi";
 import { OnError, OnExportReady, OnLoadingChanged, VisType } from "@gooddata/sdk-ui";
 
-import { useDashboardSelector, selectInsightsMap } from "../../../model";
+import { useDashboardSelector, selectInsightsMap, selectRenderMode } from "../../../model";
 import {
     DashboardItem,
     DashboardItemHeadline,
@@ -56,8 +56,7 @@ const DefaultDashboardInsightWidgetCore: React.FC<
 
     const { InsightMenuButtonComponentProvider, InsightMenuComponentProvider } =
         useDashboardComponentsContext();
-    // TODO select from state
-    const renderMode = "view";
+    const renderMode = useDashboardSelector(selectRenderMode);
 
     const InsightMenuButtonComponent = useMemo(
         () => InsightMenuButtonComponentProvider(insight, widget, renderMode),

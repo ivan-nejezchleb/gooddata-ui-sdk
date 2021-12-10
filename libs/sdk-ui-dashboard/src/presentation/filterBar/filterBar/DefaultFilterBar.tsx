@@ -11,6 +11,7 @@ import {
     selectEffectiveDateFilterTitle,
     selectIsExport,
     useDashboardSelector,
+    selectRenderMode,
 } from "../../../model";
 import { useDashboardComponentsContext } from "../../dashboardContexts";
 import { DashboardDateFilter } from "../dateFilter";
@@ -30,8 +31,7 @@ export const DefaultFilterBar = (props: IFilterBarProps): JSX.Element => {
     const dateFilterMode = useDashboardSelector(selectEffectiveDateFilterMode);
     const isExport = useDashboardSelector(selectIsExport);
     const { DashboardAttributeFilterComponentProvider } = useDashboardComponentsContext();
-    // TODO select from state
-    const renderMode = "view";
+    const renderMode = useDashboardSelector(selectRenderMode);
 
     if (isExport) {
         return <HiddenFilterBar {...props} />;

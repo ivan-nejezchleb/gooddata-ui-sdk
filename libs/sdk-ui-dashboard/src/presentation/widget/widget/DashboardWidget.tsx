@@ -1,7 +1,7 @@
 // (C) 2020-2021 GoodData Corporation
 import React, { useMemo } from "react";
 import { useDashboardComponentsContext } from "../../dashboardContexts";
-import { extendedWidgetDebugStr } from "../../../model";
+import { extendedWidgetDebugStr, selectRenderMode, useDashboardSelector } from "../../../model";
 import { DefaultDashboardWidget } from "./DefaultDashboardWidget";
 import { isDashboardWidget } from "@gooddata/sdk-backend-spi";
 import { IDashboardWidgetProps } from "./types";
@@ -19,8 +19,7 @@ const MissingWidget: React.FC = () => {
  */
 export const DashboardWidget = (props: IDashboardWidgetProps): JSX.Element => {
     const { WidgetComponentProvider } = useDashboardComponentsContext();
-    // TODO select from state
-    const renderMode = "view";
+    const renderMode = useDashboardSelector(selectRenderMode);
 
     const { widget } = props;
     const WidgetComponent = useMemo((): React.ComponentType<IDashboardWidgetProps> => {
