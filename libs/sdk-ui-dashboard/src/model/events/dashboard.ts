@@ -498,10 +498,12 @@ export function renderModeChanged(
     ctx: DashboardContext,
     dashboardRef: ObjRef,
     newRenderMode: RenderMode,
+    correlationId?: string,
 ): RenderModeChanged {
     return {
         type: "GDC.DASH/EVT.RENDER.MODE.CHANGE",
         ctx,
+        correlationId,
         payload: {
             dashboardRef,
             newRenderMode,
