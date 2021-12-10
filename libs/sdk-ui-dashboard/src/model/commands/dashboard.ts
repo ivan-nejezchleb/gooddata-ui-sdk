@@ -1,6 +1,6 @@
 // (C) 2021 GoodData Corporation
 
-import { DashboardConfig } from "../types/commonTypes";
+import { DashboardConfig, RenderMode } from "../types/commonTypes";
 import { IWorkspacePermissions } from "@gooddata/sdk-backend-spi";
 import { IDashboardCommand } from "./base";
 import { ISharingApplyPayload } from "@gooddata/sdk-ui-kit";
@@ -307,5 +307,35 @@ export function exportDashboardToPdf(correlationId?: string): ExportDashboardToP
     return {
         type: "GDC.DASH/CMD.EXPORT.PDF",
         correlationId,
+    };
+}
+
+//
+//
+//
+
+/**
+ * @alpha
+ */
+export interface ChangeRenderMode extends IDashboardCommand {
+    readonly type: "GDC.DASH/CMD.RENDER.MODE.CHANGE";
+    readonly payload: {
+        readonly newRenderMode: RenderMode;
+    };
+}
+
+/**
+ * Creates the ChangeRenderMode command. Dispatching this command will result in change of remoder mode on dashboard. The changes
+ * will be done in-memory and also propagated to the backend.
+ *
+ * @param newRenderMode - new dashboard render mode
+ * @alpha
+ */
+export function changeRenderMode(newRenderMode: RenderMode): ChangeRenderMode {
+    return {
+        type: "GDC.DASH/CMD.RENDER.MODE.CHANGE",
+        payload: {
+            newRenderMode,
+        },
     };
 }

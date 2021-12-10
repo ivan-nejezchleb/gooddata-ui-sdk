@@ -90,7 +90,8 @@ export type DashboardEventType =
     | "GDC.DASH/EVT.RENDER.ASYNC.REQUESTED"
     | "GDC.DASH/EVT.RENDER.ASYNC.RESOLVED"
     | "GDC.DASH/EVT.RENDER.RESOLVED"
-    | "GDC.DASH/EVT.SHARING.CHANGED";
+    | "GDC.DASH/EVT.SHARING.CHANGED"
+    | "GDC.DASH/EVT.RENDER.MODE.CHANGE";
 
 /**
  * Base type for all dashboard events.

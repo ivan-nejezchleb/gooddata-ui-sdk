@@ -5,7 +5,7 @@ import { IInsight, ObjRef } from "@gooddata/sdk-model";
 
 import { DateFilterConfigValidationResult } from "../../_staging/dateFilterConfig/validation";
 import { IShareProps } from "../../types";
-import { DashboardConfig, DashboardContext } from "../types/commonTypes";
+import { DashboardConfig, DashboardContext, RenderMode } from "../types/commonTypes";
 
 import { IDashboardEvent } from "./base";
 import { eventGuard } from "./util";
@@ -476,3 +476,43 @@ export function dashboardSharingChanged(
  * @alpha
  */
 export const isDashboardSharingChanged = eventGuard<DashboardSharingChanged>("GDC.DASH/EVT.SHARING.CHANGED");
+
+//
+//
+//
+
+/**
+ * This event is emitted at the end of successful 'change render mode of dashboard' command processing.
+ *
+ * @alpha
+ */
+export interface RenderModeChanged extends IDashboardEvent {
+    readonly type: "GDC.DASH/EVT.RENDER.MODE.CHANGE";
+    readonly payload: {
+        dashboardRef: ObjRef;
+        readonly newRenderMode: RenderMode;
+    };
+}
+
+export function renderModeChanged(
+    ctx: DashboardContext,
+    dashboardRef: ObjRef,
+    newRenderMode: RenderMode,
+): RenderModeChanged {
+    return {
+        type: "GDC.DASH/EVT.RENDER.MODE.CHANGE",
+        ctx,
+        payload: {
+            dashboardRef,
+            newRenderMode,
+        },
+    };
+}
+
+/**
+ * Tests whether the provided object is an instance of {@link RenderModeChanged}.
+ *
+ * @param obj - object to test
+ * @alpha
+ */
+export const isRenderModeChanged = eventGuard<RenderModeChanged>("GDC.DASH/EVT.RENDER.MODE.CHANGE");
