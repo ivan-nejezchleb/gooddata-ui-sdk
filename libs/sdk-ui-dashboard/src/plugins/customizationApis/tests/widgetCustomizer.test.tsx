@@ -37,9 +37,9 @@ describe("widget customizer", () => {
 
         const provider = Customizer.getWidgetComponentProvider();
 
-        expect(provider(testWidget("w1"))).toEqual(TestWidget1);
-        expect(provider(testWidget("w2"))).toEqual(TestWidget2);
-        expect(provider(testWidget("w3"))).toBeUndefined();
+        expect(provider(testWidget("w1"), "view")).toEqual(TestWidget1);
+        expect(provider(testWidget("w2"), "view")).toEqual(TestWidget2);
+        expect(provider(testWidget("w3"), "view")).toBeUndefined();
     });
 
     it("should use last-win when multiple widgets of same type", () => {
@@ -47,7 +47,15 @@ describe("widget customizer", () => {
         Customizer.addCustomWidget("w1", TestWidget2);
 
         const provider = Customizer.getWidgetComponentProvider();
-        expect(provider(testWidget("w1"))).toEqual(TestWidget2);
+        expect(provider(testWidget("w1"), "view")).toEqual(TestWidget2);
+    });
+
+    it("should use edit and view component", () => {
+        Customizer.addCustomWidget("w1", TestWidget1, TestWidget2);
+
+        const provider = Customizer.getWidgetComponentProvider();
+        expect(provider(testWidget("w1"), "view")).toEqual(TestWidget1);
+        expect(provider(testWidget("w1"), "edit")).toEqual(TestWidget2);
     });
 
     it("should not do any modifications once sealed", () => {
@@ -56,6 +64,7 @@ describe("widget customizer", () => {
         Customizer.addCustomWidget("w1", TestWidget2);
 
         const provider = Customizer.getWidgetComponentProvider();
-        expect(provider(testWidget("w1"))).toEqual(TestWidget1);
+        expect(provider(testWidget("w1"), "view")).toEqual(TestWidget1);
+        expect(provider(testWidget("w1"), "edit")).toEqual(TestWidget1);
     });
 });
