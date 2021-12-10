@@ -179,11 +179,13 @@ export interface IDashboardWidgetCustomizer {
      *
      * @param widgetType - unique type name of the custom widget; if plugins register multiple custom
      *  widgets for the same widget type, then the last-registered custom widget wins
-     * @param Component - React component to use for rendering of the custom widget
+     * @param Component - React component to use for rendering of the custom widget in view or edit mode
+     * @param EditComponent - React component to use for rendering of the custom widget in edit mode
      */
     addCustomWidget(
         widgetType: string,
         Component: CustomDashboardWidgetComponent,
+        EditComponent?: CustomDashboardWidgetComponent,
     ): IDashboardWidgetCustomizer;
 }
 

@@ -5,8 +5,16 @@ import { useDashboardLoader } from "@gooddata/sdk-ui-loaders";
 import { ThemedLoadingEqualizer } from "@gooddata/sdk-ui-dashboard/dist/presentation/presentationComponents";
 import { ErrorComponent } from "@gooddata/sdk-ui";
 import { IAnalyticalBackend } from "@gooddata/sdk-backend-spi";
-import { DashboardContext, DashboardPluginV1, IDashboardCustomizer } from "@gooddata/sdk-ui-dashboard";
+import {
+    DashboardContext,
+    DashboardPluginV1,
+    IDashboardCustomizer,
+    newDashboardSection,
+    newDashboardItem,
+    newCustomWidget,
+} from "@gooddata/sdk-ui-dashboard";
 import { imageWidgetProvider } from "./imageWidgetProvider";
+import { ColorWidgetView, ColorWidgetEdit } from "./ColorWidget";
 
 interface IPlayDashboardProps {
     backend: IAnalyticalBackend;
@@ -20,6 +28,23 @@ class LocalPlugin extends DashboardPluginV1 {
 
     register(_ctx: DashboardContext, customize: IDashboardCustomizer) {
         customize.insightWidgets().withCustomProvider(imageWidgetProvider);
+        customize.customWidgets().addCustomWidget("ColorWidget", ColorWidgetView, ColorWidgetEdit);
+        customize.layout().customizeFluidLayout((_layout, customizer) => {
+            customizer.addSection(
+                1,
+                newDashboardSection(
+                    "Colors are here!",
+                    newDashboardItem(newCustomWidget("colorWidget1", "ColorWidget"), {
+                        xl: {
+                            // all 12 columns of the grid will be 'allocated' for this this new item
+                            gridWidth: 12,
+                            // minimum height since the custom widget now has just some one-liner text
+                            gridHeight: 1,
+                        },
+                    }),
+                ),
+            );
+        });
     }
 }
 
