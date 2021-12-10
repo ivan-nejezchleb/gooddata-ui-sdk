@@ -166,6 +166,9 @@ export {
 } from "./ui/uiSelectors";
 export { uiActions } from "./ui";
 
+export { RenderModeState } from "./renderMode/renderModeState";
+export { selectRenderMode } from "./renderMode/renderModeSelectors";
+
 export { queryAndWaitFor } from "./_infra/queryAndWaitFor";
 export { dispatchAndWaitFor } from "./_infra/dispatchAndWaitFor";
 export { DashboardStore } from "./dashboardStore";

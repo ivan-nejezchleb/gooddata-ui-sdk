@@ -1444,6 +1444,7 @@ export type DashboardState = {
     user: UserState;
     meta: DashboardMetaState;
     drill: DrillState;
+    renderMode: RenderModeState;
     insights: EntityState<IInsight>;
     alerts: EntityState<IWidgetAlert>;
     drillTargets: EntityState<IDrillTargets>;
@@ -3375,6 +3376,12 @@ export interface RenameDashboard extends IDashboardCommand {
 // @alpha
 export function renameDashboard(newTitle: string, correlationId?: string): RenameDashboard;
 
+// @alpha (undocumented)
+export interface RenderModeState {
+    // (undocumented)
+    mode: RenderMode;
+}
+
 // @alpha
 export function replaceInsightWidgetFilterSettings(ref: ObjRef, settings: Omit<FilterOpReplaceAll, "type">, correlationId?: string): ChangeInsightWidgetFilterSettings;
 
@@ -3841,6 +3848,9 @@ export const selectPersistedDashboard: OutputSelector<DashboardState, IDashboard
 
 // @public
 export const selectPlatformEdition: OutputSelector<DashboardState, PlatformEdition, (res: ResolvedDashboardConfig) => PlatformEdition>;
+
+// @alpha
+export const selectRenderMode: OutputSelector<DashboardState, RenderMode, (res: RenderModeState) => RenderMode>;
 
 // @public
 export const selectSeparators: OutputSelector<DashboardState, ISeparators, (res: ResolvedDashboardConfig) => ISeparators>;
