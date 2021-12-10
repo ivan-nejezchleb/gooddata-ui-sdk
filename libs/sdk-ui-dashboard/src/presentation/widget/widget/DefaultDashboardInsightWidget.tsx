@@ -1,4 +1,4 @@
-// (C) 2020 GoodData Corporation
+// (C) 2020-2021 GoodData Corporation
 import React, { useMemo } from "react";
 import cx from "classnames";
 import { injectIntl, WrappedComponentProps } from "react-intl";
@@ -56,15 +56,17 @@ const DefaultDashboardInsightWidgetCore: React.FC<
 
     const { InsightMenuButtonComponentProvider, InsightMenuComponentProvider } =
         useDashboardComponentsContext();
+    // TODO select from state
+    const renderMode = "view";
 
     const InsightMenuButtonComponent = useMemo(
-        () => InsightMenuButtonComponentProvider(insight, widget),
-        [InsightMenuButtonComponentProvider, insight, widget],
+        () => InsightMenuButtonComponentProvider(insight, widget, renderMode),
+        [InsightMenuButtonComponentProvider, insight, widget, renderMode],
     );
 
     const InsightMenuComponent = useMemo(
-        () => InsightMenuComponentProvider(insight, widget),
-        [InsightMenuComponentProvider, insight, widget],
+        () => InsightMenuComponentProvider(insight, widget, renderMode),
+        [InsightMenuComponentProvider, insight, widget, renderMode],
     );
 
     return (

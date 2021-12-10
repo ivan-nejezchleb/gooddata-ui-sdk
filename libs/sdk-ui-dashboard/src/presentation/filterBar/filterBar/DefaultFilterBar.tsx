@@ -30,6 +30,8 @@ export const DefaultFilterBar = (props: IFilterBarProps): JSX.Element => {
     const dateFilterMode = useDashboardSelector(selectEffectiveDateFilterMode);
     const isExport = useDashboardSelector(selectIsExport);
     const { DashboardAttributeFilterComponentProvider } = useDashboardComponentsContext();
+    // TODO select from state
+    const renderMode = "view";
 
     if (isExport) {
         return <HiddenFilterBar {...props} />;
@@ -54,7 +56,7 @@ export const DefaultFilterBar = (props: IFilterBarProps): JSX.Element => {
                 />
             </div>
             {attributeFilters.map((filter) => {
-                const AttributeFilter = DashboardAttributeFilterComponentProvider(filter);
+                const AttributeFilter = DashboardAttributeFilterComponentProvider(filter, renderMode);
 
                 return (
                     <div
