@@ -157,6 +157,7 @@ export function* resolveDashboardConfig(
         separators: settings.separators,
         dateFilterConfig: validDateFilterConfig,
         settings: settings.settings,
+        initialRenderMode: config.initialRenderMode ?? "view",
         colorPalette,
         objectAvailability: config.objectAvailability ?? {},
         mapboxToken: config.mapboxToken,

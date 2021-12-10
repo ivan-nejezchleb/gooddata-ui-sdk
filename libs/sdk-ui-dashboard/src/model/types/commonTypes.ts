@@ -50,6 +50,11 @@ export type DashboardConfig = {
     locale?: ILocale;
 
     /**
+     * Set initial render mode
+     */
+    initialRenderMode?: RenderMode;
+
+    /**
      * Number separators to use for charts and KPIs on the dashboard.
      */
     separators?: ISeparators;

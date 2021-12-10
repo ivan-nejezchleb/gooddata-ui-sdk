@@ -708,6 +708,7 @@ export type DashboardCommandType = "GDC.DASH/CMD.INITIALIZE" | "GDC.DASH/CMD.SAV
 // @public
 export type DashboardConfig = {
     locale?: ILocale;
+    initialRenderMode?: RenderMode;
     separators?: ISeparators;
     settings?: ISettings;
     dateFilterConfig?: IDateFilterConfig;

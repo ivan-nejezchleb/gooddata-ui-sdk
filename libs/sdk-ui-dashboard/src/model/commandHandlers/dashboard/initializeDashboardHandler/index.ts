@@ -34,6 +34,7 @@ import { createDisplayFormMapFromCatalog } from "../../../../_staging/catalog/di
 import { getPrivateContext } from "../../../store/_infra/contexts";
 import { accessibleDashboardsActions } from "../../../store/accessibleDashboards";
 import { loadAccessibleDashboardList } from "./loadAccessibleDashboardList";
+import { renderModeActions } from "../../../store/renderMode";
 
 function loadDashboardFromBackend(
     ctx: DashboardContext,
@@ -130,6 +131,7 @@ function* loadExistingDashboard(
     const batch: BatchAction = batchActions(
         [
             backendCapabilitiesActions.setBackendCapabilities(backend.capabilities),
+            renderModeActions.setRenderMode(config.initialRenderMode),
             configActions.setConfig(config),
             userActions.setUser(user),
             permissionsActions.setPermissions(permissions),
