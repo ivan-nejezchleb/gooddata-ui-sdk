@@ -3,10 +3,11 @@
 SCRIPTDIR=`dirname $0`
 ROOTDIR="${SCRIPTDIR}/.."
 EXPORTER="${ROOTDIR}/node_modules/.bin/gdc-catalog-export"
-OUTPUT="${ROOTDIR}/src/md/full.ts"
-PROJECTID="xms7ga4tf3g3nzucd8380o2bev8oeknp"
+OUTPUT="${SCRIPTDIR}/full.ts"
+PROJECTID="auiwj6pa2cs3twpjr98gtjfb34x3i0gv"
 
 $EXPORTER \
-  --hostname "https://developer.na.gooddata.com" \
+  --hostname "https://staging3.intgdc.com" \
   --output "${OUTPUT}" \
-  --project-id "${PROJECTID}"
+  --project-id "${PROJECTID}" \
+  --accept-untrusted-ssl
