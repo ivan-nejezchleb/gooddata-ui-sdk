@@ -4,8 +4,10 @@ import {
     SortDirection as TigerSortDirection,
     SortKeyAttribute,
     SortKeyValue,
+    SortType,
 } from "@gooddata/api-client-tiger";
 import {
+    IAttributeSortItem,
     IExecutionDefinition,
     ILocatorItem,
     isAttributeLocator,
@@ -38,6 +40,15 @@ function convertSortDirection(direction: SortDirection): TigerSortDirection {
     }
 
     return TigerSortDirection.DESC;
+}
+
+function convertSortType(sortItem: IAttributeSortItem): { sortType?: SortType } {
+    if (sortItem.attributeSortItem.aggregation) {
+        return {
+            sortType: SortType.AREA,
+        };
+    }
+    return {};
 }
 
 /**
@@ -116,6 +127,7 @@ function dimensionsWithSorts(dims: Dimension[], sorts: ISortItem[]): Dimension[]
                 attribute: {
                     attributeIdentifier,
                     direction: convertSortDirection(sortItem.attributeSortItem.direction),
+                    ...convertSortType(sortItem),
                 },
             };
 
