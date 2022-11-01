@@ -1,0 +1,120 @@
+// (C) 2020 GoodData Corporation
+@use "variables";
+
+.gd-description-panel-bubble {
+    .bubble-content {
+        /* stylelint-disable declaration-no-important */
+        padding: 0 !important;
+    }
+}
+
+.gd-description-panel {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: variables.$gd-color-white;
+    font-family: variables.$gd-font-primary;
+    width: 220px;
+    max-height: 510px;
+    overflow: hidden;
+    padding: 15px 0;
+
+    &-title-wrapper {
+        overflow: hidden;
+    }
+
+    &-title {
+        flex-shrink: 0;
+        font-size: 14px;
+        line-height: 23px;
+        color: variables.$gd-color-text;
+        margin: 0 15px;
+        overflow: hidden;
+        overflow-wrap: break-word;
+    }
+}
+
+.gd-ellipsis-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &-content {
+        font-size: 13px;
+        line-height: 18px;
+        color: variables.$gd-medium-gray;
+        scroll-behavior: auto;
+        overflow: auto;
+        overflow-wrap: break-word;
+        padding: 0 15px;
+    }
+
+    &-button {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        font-size: 12px;
+        line-height: 27px;
+        color: variables.$gd-medium-gray;
+        text-decoration: underline;
+        width: fit-content;
+        margin: 0 15px;
+    }
+
+    &-button:hover {
+        color: variables.$gd-color-text;
+    }
+}
+
+.gd-metadata-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    &-title {
+        flex-shrink: 0;
+        font-size: 10px;
+        line-height: 14px;
+        color: variables.$gd-color-state-blank;
+        text-transform: uppercase;
+        margin: 0 15px;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        max-height: 99px;
+        overflow: auto;
+        padding: 0 15px;
+    }
+
+    &-li {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        line-height: 19px;
+        color: variables.$gd-color-text;
+        overflow: hidden;
+        white-space: nowrap;
+
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &-icon {
+        color: variables.$gd-color-state-blank;
+        cursor: help;
+        flex-shrink: 0;
+    }
+}
