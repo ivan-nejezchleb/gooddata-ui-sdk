@@ -56,7 +56,7 @@ export const DefaultFeatureFlags: ITigerFeatureFlags = {
     enableDateFormats: false,
     enableLongitudeAndLatitudeLabels: false,
     enableMSSQLDataSource: false,
-    enableDescriptions: false,
+    enableDescriptions: true, // TODO INE Dont merge with this, change to default false
 };
 
 export const FeatureFlagsValues = {
