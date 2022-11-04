@@ -40,7 +40,7 @@ export interface IKpiWidgetBase extends IAnalyticalWidget {
     readonly type: "kpi";
 
     /**
-     * Temporary place for legacy kpi properties
+     * Temporary place for legacy kpi properties.
      */
     readonly kpi: IKpi;
 
@@ -50,7 +50,7 @@ export interface IKpiWidgetBase extends IAnalyticalWidget {
     readonly drills: KpiDrillDefinition[];
 
     /**
-     * Configuration of the kpi itself
+     * Configuration of the kpi itself.
      */
     readonly configuration?: IKpiWidgetConfiguration;
 }
@@ -63,16 +63,16 @@ export interface IKpiWidgetConfiguration {
 }
 
 /**
- * Configuration of kpi's description
+ * Configuration of kpi's description.
  * @alpha
  */
 export interface IKpiWidgetDescriptionConfiguration {
     /**
-     * whether description should be visible or not
+     * Whether description should be visible or not.
      */
     visible: boolean;
     /**
-     * whether description should be used from kpi or inherited from its metric
+     * Whether description should be used from kpi or inherited from its metric.
      */
     source: KpiWidgetDescriptionSourceType;
 }
