@@ -46,6 +46,25 @@ function initializeStore(
     workspaceType: WorkspaceType,
     defType: SupportedDefinitionTypes,
 ): string {
+    const emptyDir = (folderPath: string) => {
+        try {
+            // Find all files in the folder
+            const files = fs.readdirSync(folderPath);
+            for (const file of files) {
+                const curPath = path.resolve(folderPath, file);
+                if (fs.lstatSync(curPath).isDirectory()) {
+                    // recurse
+                    emptyDir(curPath);
+                } else {
+                    // delete file
+                    fs.unlinkSync(curPath);
+                }
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     /*
      * construct full path to a store. the src/recordings/uiTestScenarios is standard path in the
      * different workspace projects
@@ -65,6 +84,8 @@ function initializeStore(
 
         throw new Error();
     }
+    // to prevent old invalid scenario recordings to stay in dir
+    emptyDir(dir);
 
     return dir;
 }
