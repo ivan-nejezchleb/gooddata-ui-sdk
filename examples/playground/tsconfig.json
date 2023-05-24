@@ -34,6 +34,6 @@
         },
         
     },
-    "include": ["src/index.tsx", "typings"],
+    "include": ["src/index.tsx", "typings", "src/playground"],
     "exclude": ["**/node_modules", "esm"]
 }

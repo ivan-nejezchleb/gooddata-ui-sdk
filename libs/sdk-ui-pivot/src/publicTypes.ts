@@ -135,6 +135,7 @@ export interface IPivotTableConfig {
      * Customize placement of metrics - in columns or in rows
      */
     measureGroupDimension?: MeasureGroupDimension;
+    columnHeadersPosition?: "top" | "left";
 }
 
 /**

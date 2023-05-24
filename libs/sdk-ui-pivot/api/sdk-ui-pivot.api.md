@@ -170,6 +170,8 @@ export interface IPivotTableBucketProps {
 
 // @public (undocumented)
 export interface IPivotTableConfig {
+    // (undocumented)
+    columnHeadersPosition?: "top" | "left";
     columnSizing?: IColumnSizing;
     groupRows?: boolean;
     maxHeight?: number;

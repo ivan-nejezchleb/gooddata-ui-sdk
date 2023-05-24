@@ -15,6 +15,7 @@ import {
     ROW_MEASURE_COLUMN,
     COLUMN_TOTAL,
     COLUMN_SUBTOTAL,
+    MIXED_HEADERS_COLUMN,
 } from "../base/constants.js";
 import { isCellDrillable } from "../drilling/cellDrillabilityPredicate.js";
 import last from "lodash/last.js";
@@ -57,12 +58,13 @@ export function cellClassFactory(
         const isColumnTotal = colDef.type === COLUMN_TOTAL;
         const isColumnSubtotal = colDef.type === COLUMN_SUBTOTAL;
         const isRowMetric = colDef.type === ROW_MEASURE_COLUMN;
+        const isMixedHeader = colDef.type === MIXED_HEADERS_COLUMN;
         let hasDrillableHeader = false;
 
         const cellAllowsDrill = !isEmptyCell || colDef.type === MEASURE_COLUMN;
         const cellIsNotTotalSubtotal = !isRowTotal && !isRowSubtotal && !isColumnTotal && !isColumnSubtotal;
 
-        if (cellIsNotTotalSubtotal && !isRowMetric && cellAllowsDrill) {
+        if (cellIsNotTotalSubtotal && !isRowMetric && !isMixedHeader && cellAllowsDrill) {
             hasDrillableHeader = isCellDrillable(col, row, dv, drillablePredicates);
         }
 

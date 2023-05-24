@@ -137,6 +137,7 @@ export class TableFacade {
         this.tableDescriptor = TableDescriptor.for(
             this.visibleData,
             emptyHeaderTitleFromIntl(props.intl),
+            props.config,
             props.intl,
         );
 

@@ -16,6 +16,7 @@ export const ColumnGroupingDescriptorId = "root";
 export type TableColType =
     | "sliceCol"
     | "sliceMeasureCol"
+    | "mixedHeadersCol"
     | "mixedValuesCol"
     | "seriesCol"
     | "scopeCol"
@@ -78,6 +79,56 @@ export function isSliceCol(obj: unknown): obj is SliceCol {
     return (obj as SliceCol)?.type === "sliceCol";
 }
 
+export interface SliceMeasureCol extends TableCol {
+    readonly type: "sliceMeasureCol";
+
+    /**
+     * Column index among all slice columns
+     */
+    index: number;
+
+    /**
+     * Path of indexes to follow from root, through children in order to get to this node.
+     */
+    readonly fullIndexPathToHere: number[];
+}
+
+export interface MixedHeadersCol extends TableCol {
+    readonly type: "mixedHeadersCol";
+
+    /**
+     * Column index among all slice columns
+     */
+    index: number; // probably will always be 0 as there will be always just one
+
+    /**
+     * Path of indexes to follow from root, through children in order to get to this node.
+     */
+    readonly fullIndexPathToHere: number[];
+}
+
+export function isMixedHeadersCol(obj: unknown): obj is MixedHeadersCol {
+    return (obj as MixedHeadersCol)?.type === "mixedHeadersCol";
+}
+
+export interface MixedValuesCol extends TableCol {
+    readonly type: "mixedValuesCol";
+
+    /**
+     * Column index among all slice columns
+     */
+    index: number;
+
+    /**
+     * Path of indexes to follow from root, through children in order to get to this node.
+     */
+    readonly fullIndexPathToHere: number[];
+}
+
+export function isMixedValuesCol(obj: unknown): obj is MixedValuesCol {
+    return (obj as MixedValuesCol)?.type === "mixedValuesCol";
+}
+
 /**
  * Represents table column which displays names of metrics when transposed to rows.
  *
@@ -109,24 +160,6 @@ export interface SliceMeasureCol extends TableCol {
 
 export function isSliceMeasureCol(obj: unknown): obj is SliceMeasureCol {
     return (obj as SliceMeasureCol)?.type === "sliceMeasureCol";
-}
-
-export interface MixedValuesCol extends TableCol {
-    readonly type: "mixedValuesCol";
-
-    /**
-     * Column index among all slice columns
-     */
-    index: number;
-
-    /**
-     * Path of indexes to follow from root, through children in order to get to this node.
-     */
-    readonly fullIndexPathToHere: number[];
-}
-
-export function isMixedValuesCol(obj: unknown): obj is MixedValuesCol {
-    return (obj as MixedValuesCol)?.type === "mixedValuesCol";
 }
 
 /**
@@ -287,7 +320,7 @@ export type AnySliceCol = SliceCol | SliceMeasureCol;
 /**
  * Any table col. May be either the col describing the table slicing or col describing the data part of the table.
  */
-export type AnyCol = SliceCol | SliceMeasureCol | MixedValuesCol | DataCol | ScopeCol;
+export type AnyCol = SliceCol | SliceMeasureCol | MixedHeadersCol | MixedValuesCol | DataCol | ScopeCol;
 
 /**
  * Descriptors of all table columns. The table columns are divided into two groups:
@@ -323,6 +356,8 @@ export type TableCols = {
      * Column used for metric names when table is transposed (metrics are in rows)
      */
     readonly sliceMeasureCols: SliceMeasureCol[];
+
+    readonly mixedHeadersCols: MixedHeadersCol[];
 
     /**
      * Column with values of either elements or metrics or both mixed together

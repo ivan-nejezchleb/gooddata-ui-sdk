@@ -96,6 +96,31 @@ export function columnAttributeTemplate(table: TableFacade, props: Readonly<ICor
     };
 }
 
+// TODO remove sonar warning, update template implementation
+// eslint-disable-next-line sonarjs/no-identical-functions
+export function mixedHeadersTemplate(table: TableFacade, props: Readonly<ICorePivotTableProps>): ColDef {
+    const cellRenderer = createCellRenderer();
+
+    return {
+        cellClass: cellClassFactory(table, props, "gd-row-attribute-column-header gd-transposed-header"), // TODO unique style
+        headerClass: headerClassFactory(table, props, "gd-row-attribute-column-header"), // TODO unique style
+        colSpan: (params) => {
+            if (
+                // params.data is undefined when rows are in loading state
+                params.data?.colSpan &&
+                AVAILABLE_TOTALS.find((item: string) => item === params.data[params.data.colSpan.headerKey])
+            ) {
+                return params.data.colSpan.count;
+            }
+            return 1;
+        },
+        valueFormatter: (params) => {
+            return params.value === undefined ? null : params.value;
+        },
+        cellRenderer,
+    };
+}
+
 const AG_NUMERIC_CELL_CLASSNAME = "ag-numeric-cell";
 const AG_NUMERIC_HEADER_CLASSNAME = "ag-numeric-header";
 

@@ -393,6 +393,8 @@ export class PluggablePivotTable extends AbstractPluggableVisualization {
             insightProperties(insight),
         );
 
+        // TODO:
+        const pinned: boolean = insight?.insight?.properties?.controls?.pinned?.enabled;
         const tableConfig: IPivotTableConfig = {
             ...createPivotTableConfig(
                 config,
@@ -404,6 +406,7 @@ export class PluggablePivotTable extends AbstractPluggableVisualization {
             ...customVisualizationConfig,
             maxHeight,
             maxWidth,
+            pinned,
         };
 
         const pivotTableProps: ICorePivotTableProps = {
@@ -456,10 +459,12 @@ export class PluggablePivotTable extends AbstractPluggableVisualization {
     protected renderConfigurationPanel(insight: IInsightDefinition): void {
         const configPanelElement = this.getConfigPanelElement();
 
+        // TODO:
         if (configPanelElement) {
             const properties = this.visualizationProperties ?? {};
 
             // we need to handle cases when attribute previously bearing the default sort is no longer available
+            //@ts-ignore
             const sanitizedProperties = properties.sortItems
                 ? {
                       ...properties,

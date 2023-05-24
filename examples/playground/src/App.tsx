@@ -1,7 +1,12 @@
 // (C) 2019-2023 GoodData Corporation
 import React, { useMemo } from "react";
-import { BackendProvider, WorkspaceProvider } from "@gooddata/sdk-ui";
+import { BackendProvider, WorkspaceProvider, IntlWrapper } from "@gooddata/sdk-ui";
 import { createBackend } from "./createBackend.js";
+
+import { ControlledPivot } from "./playground/ControlledPivot";
+import { ControlledTransposedPivot } from "./playground/ControlledTransposedPivot";
+
+import "./playground/styles.scss";
 
 function hasCredentialsSetup(): boolean {
     if (BACKEND_TYPE === "tiger") {
@@ -19,7 +24,12 @@ const AppWithBackend: React.FC = () => {
     return (
         <BackendProvider backend={backend}>
             <WorkspaceProvider workspace={WORKSPACE}>
-                {/* Build your playground components under the playground directory.*/}
+                <IntlWrapper locale={"en-US"}>
+                    <h1>Transposing</h1>
+                    <ControlledTransposedPivot />
+                    <h1>Pivoting</h1>
+                    <ControlledPivot />
+                </IntlWrapper>
             </WorkspaceProvider>
         </BackendProvider>
     );
