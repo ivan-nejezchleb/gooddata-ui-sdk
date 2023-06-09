@@ -307,7 +307,9 @@ export class TableDescriptor {
      *
      * @param col - column to get absolute index of
      */
-    public getAbsoluteLeafColIndex(col: SliceCol | SliceMeasureCol | LeafDataCol | MixedHeadersCol | MixedValuesCol): number {
+    public getAbsoluteLeafColIndex(
+        col: SliceCol | SliceMeasureCol | LeafDataCol | MixedHeadersCol | MixedValuesCol,
+    ): number {
         if (isSliceCol(col) || isSliceMeasureCol(col) || isMixedHeadersCol(col)) {
             return col.index;
         } else if (isScopeCol(col)) {
@@ -322,9 +324,12 @@ export class TableDescriptor {
             );
         }
 
-        // TODO INE check index for AttributeMeasureHeadersCol | AttributeMeasureValuesCol
-
-        return this.sliceColCount() + col.index;
+        return (
+            this.sliceColCount() +
+            this.sliceMeasureColCount() +
+            this.attributeMeasureHeadersColsCount() +
+            col.index
+        );
     }
 
     /**
@@ -359,7 +364,7 @@ export class TableDescriptor {
      * sum or have no rows whatsoever.
      */
     public canTableHaveRowTotals(): boolean {
-        return this.sliceColCount() > 0 && this.seriesColsCount() > 0;
+        return this.sliceColCount() > 0 && (this.seriesColsCount() > 0 || this.sliceMeasureColCount() > 0);
     }
 
     /**
