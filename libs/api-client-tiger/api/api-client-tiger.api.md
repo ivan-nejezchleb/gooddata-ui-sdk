@@ -5622,6 +5622,7 @@ export interface FactsApiInterface {
 export type FeatureContext = {
     organizationId: string;
     earlyAccess: string;
+    uiSdkVersion: string;
 };
 
 // @public

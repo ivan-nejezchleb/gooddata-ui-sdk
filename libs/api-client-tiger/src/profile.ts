@@ -4,6 +4,7 @@ import { AxiosInstance } from "axios";
 export type FeatureContext = {
     organizationId: string;
     earlyAccess: string;
+    uiSdkVersion: string;
 };
 
 export interface ILiveFeatures {

@@ -11,6 +11,7 @@ import { ITigerFeatureFlags, DefaultFeatureFlags } from "../uiFeatures.js";
 
 import { getFeatureHubFeatures } from "./hub.js";
 import { getStaticFeatures } from "./static.js";
+import { LIB_VERSION } from "../../__version.js";
 
 export class TigerFeaturesService {
     constructor(private readonly authCall: TigerAuthenticatedCallGuard) {}
@@ -68,5 +69,8 @@ export function pickContext(
     if (organizationId !== undefined) {
         context.organizationId = organizationId;
     }
+
+    context.uiSdkVersion = LIB_VERSION;
+
     return context;
 }
