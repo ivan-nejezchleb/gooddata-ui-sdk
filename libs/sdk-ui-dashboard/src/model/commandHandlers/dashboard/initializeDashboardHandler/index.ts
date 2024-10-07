@@ -5,7 +5,7 @@ import { InitializeDashboard } from "../../../commands/dashboard.js";
 import { DashboardInitialized, dashboardInitialized } from "../../../events/dashboard.js";
 import { loadingActions } from "../../../store/loading/index.js";
 import { DashboardContext, PrivateDashboardContext } from "../../../types/commonTypes.js";
-import { IDashboardWithReferences, walkLayout } from "@gooddata/sdk-backend-spi";
+import { IDashboardWithReferences, IWorkspaceCatalog, walkLayout } from "@gooddata/sdk-backend-spi";
 import { resolveDashboardConfig } from "./resolveDashboardConfig.js";
 import { configActions } from "../../../store/config/index.js";
 import { entitlementsActions } from "../../../store/entitlements/index.js";
@@ -14,7 +14,7 @@ import { dateFilterConfigActions } from "../../../store/dateFilterConfig/index.j
 import { DateFilterMergeResult, mergeDateFilterConfigWithOverrides } from "./mergeDateFilterConfigs.js";
 import { resolvePermissions } from "./resolvePermissions.js";
 import { permissionsActions } from "../../../store/permissions/index.js";
-import { loadCatalog } from "./loadCatalog.js";
+//import { loadCatalog } from "./loadCatalog.js";
 import { loadDashboardAlerts } from "./loadDashboardAlerts.js";
 import { catalogActions } from "../../../store/catalog/index.js";
 import { alertsActions } from "../../../store/alerts/index.js";
@@ -163,7 +163,7 @@ function* loadExistingDashboard(
         call(resolveDashboardConfig, ctx, cmd),
         call(resolvePermissions, ctx, cmd),
         call(resolveEntitlements, ctx),
-        call(loadCatalog, ctx, cmd),
+        //call(loadCatalog, ctx, cmd),
         call(loadDashboardAlerts, ctx),
         call(loadUser, ctx),
         call(loadDashboardList, ctx),
@@ -182,13 +182,13 @@ function* loadExistingDashboard(
         config,
         permissions,
         entitlements,
-        catalog,
+        //catalog,
         alerts,
         user,
         listedDashboards,
         legacyDashboards,
         dashboardPermissions,
-        dateHierarchyTemplates,
+        _dateHierarchyTemplates,
         filterViews,
         accessibleDashboards,
     ]: [
@@ -196,7 +196,7 @@ function* loadExistingDashboard(
         SagaReturnType<typeof resolveDashboardConfig>,
         SagaReturnType<typeof resolvePermissions>,
         PromiseFnReturnType<typeof resolveEntitlements>,
-        PromiseFnReturnType<typeof loadCatalog>,
+        //PromiseFnReturnType<typeof loadCatalog>,
         PromiseFnReturnType<typeof loadDashboardAlerts>,
         PromiseFnReturnType<typeof loadUser>,
         PromiseFnReturnType<typeof loadDashboardList>,
@@ -206,6 +206,63 @@ function* loadExistingDashboard(
         PromiseFnReturnType<typeof loadFilterViews>,
         PromiseFnReturnType<typeof loadAccessibleDashboardList>,
     ] = yield all(calls);
+
+    const loadResult = {
+        allAvailableItems: () => [],
+        availableAttributes: () => [],
+        availableMeasures: () => [],
+        availableFacts: () => [],
+        availableDateDatasets: () => [],
+        availableAttributeHierarchies: () => [],
+        groups: () => [],
+        allItems: () => [],
+        attributes: () => [],
+        measures: () => [],
+        facts: () => [],
+        dateDatasets: () => [],
+        attributeHierarchies: () => [],
+    };
+
+    const factory = {
+        forItems: () => {
+            return factory;
+        },
+        forInsight: () => {
+            return factory;
+        },
+        forDataset: () => {
+            return factory;
+        },
+        forTypes: () => {
+            return factory;
+        },
+        includeTags: () => {
+            return factory;
+        },
+        excludeTags: () => {
+            return factory;
+        },
+        withGroups: () => {
+            return factory;
+        },
+        withOptions: () => {
+            return factory;
+        },
+        load: () => {
+            return Promise.resolve(loadResult);
+        },
+    };
+
+    const catalog: IWorkspaceCatalog = {
+        groups: () => [],
+        allItems: () => [],
+        attributes: () => [],
+        measures: () => [],
+        facts: () => [],
+        dateDatasets: () => [],
+        attributeHierarchies: () => [],
+        availableItems: () => factory,
+    };
 
     const {
         dashboard: loadedDashboard,
@@ -253,12 +310,18 @@ function* loadExistingDashboard(
             userActions.setUser(user),
             permissionsActions.setPermissions(permissions),
             catalogActions.setCatalogItems({
-                attributes: catalog.attributes(),
-                dateDatasets: catalog.dateDatasets(),
-                facts: catalog.facts(),
-                measures: catalog.measures(),
-                attributeHierarchies: catalog.attributeHierarchies(),
-                dateHierarchyTemplates: dateHierarchyTemplates,
+                // attributes: catalog.attributes(),
+                // dateDatasets: catalog.dateDatasets(),
+                // facts: catalog.facts(),
+                // measures: catalog.measures(),
+                // attributeHierarchies: catalog.attributeHierarchies(),
+                // dateHierarchyTemplates: dateHierarchyTemplates,
+                attributes: [],
+                dateDatasets: [],
+                facts: [],
+                measures: [],
+                attributeHierarchies: [],
+                dateHierarchyTemplates: [],
             }),
             ...initActions,
             alertsActions.setAlerts(alerts),
@@ -306,17 +369,17 @@ function* initializeNewDashboard(
         config,
         permissions,
         entitlements,
-        catalog,
+        //catalog,
         user,
         listedDashboards,
         accessibleDashboards,
         legacyDashboards,
-        dateHierarchyTemplates,
+        _dateHierarchyTemplates,
     ]: [
         SagaReturnType<typeof resolveDashboardConfig>,
         SagaReturnType<typeof resolvePermissions>,
         PromiseFnReturnType<typeof resolveEntitlements>,
-        PromiseFnReturnType<typeof loadCatalog>,
+        //PromiseFnReturnType<typeof loadCatalog>,
         PromiseFnReturnType<typeof loadUser>,
         PromiseFnReturnType<typeof loadDashboardList>,
         PromiseFnReturnType<typeof loadAccessibleDashboardList>,
@@ -326,7 +389,7 @@ function* initializeNewDashboard(
         call(resolveDashboardConfig, ctx, cmd),
         call(resolvePermissions, ctx, cmd),
         call(resolveEntitlements, ctx),
-        call(loadCatalog, ctx, cmd),
+        //call(loadCatalog, ctx, cmd),
         call(loadUser, ctx),
         call(loadDashboardList, ctx),
         call(loadAccessibleDashboardList, ctx),
@@ -354,12 +417,18 @@ function* initializeNewDashboard(
             userActions.setUser(user),
             permissionsActions.setPermissions(permissions),
             catalogActions.setCatalogItems({
-                attributes: catalog.attributes(),
-                dateDatasets: catalog.dateDatasets(),
-                facts: catalog.facts(),
-                measures: catalog.measures(),
-                attributeHierarchies: catalog.attributeHierarchies(),
-                dateHierarchyTemplates: dateHierarchyTemplates,
+                // attributes: catalog.attributes(),
+                // dateDatasets: catalog.dateDatasets(),
+                // facts: catalog.facts(),
+                // measures: catalog.measures(),
+                // attributeHierarchies: catalog.attributeHierarchies(),
+                // dateHierarchyTemplates: dateHierarchyTemplates,
+                attributes: [],
+                dateDatasets: [],
+                facts: [],
+                measures: [],
+                attributeHierarchies: [],
+                dateHierarchyTemplates: [],
             }),
             listedDashboardsActions.setListedDashboards(listedDashboards),
             accessibleDashboardsActions.setAccessibleDashboards(accessibleDashboards),
